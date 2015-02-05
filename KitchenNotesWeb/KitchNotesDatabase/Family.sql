@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Family]
+(
+	[FamilyId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [FamilyName] NCHAR(10) NULL
+)

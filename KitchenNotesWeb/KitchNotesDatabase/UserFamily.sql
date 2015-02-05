@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[UserFamily]
+(
+	[UserFamilyId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [UserId] UNIQUEIDENTIFIER NOT NULL, 
+    [FamilyId] UNIQUEIDENTIFIER NOT NULL, 
+    CONSTRAINT [fk_UserId] FOREIGN KEY ([UserId]) REFERENCES [User]([UserId]), 
+    CONSTRAINT [fk_FamilyId] FOREIGN KEY ([FamilyId]) REFERENCES [Family]([FamilyId])
+)
