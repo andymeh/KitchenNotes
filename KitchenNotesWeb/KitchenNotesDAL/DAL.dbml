@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="KitchNotesDB" Class="DALDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=WIN-5OK3L3RNJQ8;Initial Catalog=KitchNotesDB;Integrated Security=True" SettingsObjectName="KitchenNotesDAL.Properties.Settings" SettingsPropertyName="KitchNotesDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Family" Member="Families">
+    <Type Name="Family">
+      <Column Name="FamilyId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FamilyName" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="Family_UserFamily" Member="UserFamilies" ThisKey="FamilyId" OtherKey="FamilyId" Type="UserFamily" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Notes" Member="Notes">
+    <Type Name="Note">
+      <Column Name="NoteId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Note" Member="Note1" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="DateAdded" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UserFamilyId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="UserFamily_Note" Member="UserFamily" ThisKey="UserFamilyId" OtherKey="UserFamilyId" Type="UserFamily" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Forename" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="User_UserFamily" Member="UserFamilies" ThisKey="UserId" OtherKey="UserId" Type="UserFamily" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserFamily" Member="UserFamilies">
+    <Type Name="UserFamily">
+      <Column Name="UserFamilyId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FamilyId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="UserFamily_Note" Member="Notes" ThisKey="UserFamilyId" OtherKey="UserFamilyId" Type="Note" />
+      <Association Name="Family_UserFamily" Member="Family" ThisKey="FamilyId" OtherKey="FamilyId" Type="Family" IsForeignKey="true" />
+      <Association Name="User_UserFamily" Member="User" ThisKey="UserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
