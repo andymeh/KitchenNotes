@@ -46,9 +46,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Helpers\Helpers.csproj">
+      <Project>{b43dad91-4a0e-4ba5-b143-a3ebcf2520e8}</Project>
+      <Name>Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KitchenNotesBLL\KitchenNotesBLL.csproj">
+      <Project>{bd17ee1b-7dda-4d77-8dff-60ea1d4fb72c}</Project>
+      <Name>KitchenNotesBLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KitchenNotesDAL\KitchenNotesDAL.csproj">
       <Project>{51868002-04e4-4f06-bd81-97b6d9bf35ae}</Project>
       <Name>KitchenNotesDAL</Name>

@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KitchenNotesDAL;
+using KitchenNotesBLL;
 using System.Data.Linq;
+using Helpers;
 
 namespace TestConsoleApp
 {
@@ -17,15 +19,14 @@ namespace TestConsoleApp
 
         public static void newFam()
         {
-            Family oFam = new Family();
-            using (var dc = new DALDataContext())
-            {
-                oFam = dc.Families.FirstOrDefault(x => x.FamilyName == "Andy");
+            string newHubName = Console.ReadLine();
+            KitchenNotesHub.addHub(newHubName);
+            Hub newHub = KitchenNotesHub.getHub(newHubName);
+            //KitchenNotesUser.addNewUserToExistingHub("AndyMehaffy", newHub.HubName, SHA1.Encode("graham"), "Emma", newHub.HubId);
 
-                Console.Write(string.Format("Family ID : {0}, Family Name {1}", oFam.FamilyId.ToString(), oFam.FamilyName));
-                Console.ReadLine();
-            }
-
+            
+            Console.WriteLine("ID: " + newHub.HubId + " Name: " + newHub.HubName);
+            Console.ReadKey();
         }
     }
 }
