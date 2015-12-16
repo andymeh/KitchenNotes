@@ -3,6 +3,6 @@
 	[NoteId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
     [Note] NVARCHAR(MAX) NOT NULL, 
     [DateAdded] DATETIME NOT NULL, 
-    [UserFamilyId] UNIQUEIDENTIFIER NULL, 
-    CONSTRAINT [fk_UserFamilyId] FOREIGN KEY ([UserFamilyId]) REFERENCES [UserFamily]([UserFamilyId])
+    [UserHubId] UNIQUEIDENTIFIER NULL, 
+    CONSTRAINT [fk_UserHubId] FOREIGN KEY ([UserHubId]) REFERENCES [UserHub]([UserHubId])
 )

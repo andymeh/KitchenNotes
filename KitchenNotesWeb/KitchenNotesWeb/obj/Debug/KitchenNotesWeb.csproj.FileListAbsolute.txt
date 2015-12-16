@@ -61,3 +61,11 @@ C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Syst
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\obj\Debug\KitchenNotesWeb.csprojResolveAssemblyReference.cache
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\obj\Debug\KitchenNotesWeb.dll
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\obj\Debug\KitchenNotesWeb.pdb
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\KitchenNotesBLL.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\KitchenNotesDAL.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\KitchenNotesBLL.pdb
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\KitchenNotesDAL.pdb
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Helpers.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Helpers.pdb
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Forloop.HtmlHelpers.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Forloop.HtmlHelpers.xml

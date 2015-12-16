@@ -1,10 +1,29 @@
 ﻿<div class="jumbotron">
-    <h1>KitchenNotes Login</h1>
-    <div class="input-group">
-        <input type="text" class="form-control" placeholder="Say something">
-        <span class="input-group-btn">
-            <button class="btn btn-primary" type="button">SEND</button>
-        </span>
-    </div>
+
+    @if (Request.IsAuthenticated)
+    {
+        <h1>Welcome @Html.Encode(User.Identity.Name)</h1>
+    }
+    else
+    {
+        <h1>Please Sign in Or Register</h1>
+        <ul class="nav navbar-nav navbar-right">
+            <li><button type="button" class="btn btn-success btn-lg" onclick="location.href='@Url.Action("Register", "User")'">Register new Hub</button></li>
+            <li><button type="button" class="btn btn-info btn-lg" onclick="location.href='@Url.Action("NewUser", "User")'">Join a Hub</button></li>
+            <li><button type="button" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("Login", "User")'">Sign In</button></li>
+        </ul>
+    }
+            
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Say something">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button">SEND</button>
+                </span>
+            </div>
+            <div>
+
+                <h1>Name:  @ViewBag.FamilyName</h1>
+            </div>
+
 </div>
 

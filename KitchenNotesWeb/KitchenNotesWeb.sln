@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22310.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenNotesWeb", "KitchenNotesWeb\KitchenNotesWeb.csproj", "{E9728DF0-DDAA-4DDD-8EEF-76E39AC0ABF6}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenNotesDAL", "KitchenNotesDAL\KitchenNotesDAL.csproj", "{51868002-04E4-4F06-BD81-97B6D9BF35AE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApp", "TestConsoleApp\TestConsoleApp.csproj", "{E64D6BD2-075C-483E-870A-DDCF4B3BCB43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{B43DAD91-4A0E-4BA5-B143-A3EBCF2520E8}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -174,6 +176,22 @@ Global
 		{E64D6BD2-075C-483E-870A-DDCF4B3BCB43}.Release|x64.Build.0 = Release|Any CPU
 		{E64D6BD2-075C-483E-870A-DDCF4B3BCB43}.Release|x86.ActiveCfg = Release|Any CPU
 		{E64D6BD2-075C-483E-870A-DDCF4B3BCB43}.Release|x86.Build.0 = Release|Any CPU
+		{B43DAD91-4A0E-4BA5-B143-A3EBCF2520E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B43DAD91-4A0E-4BA5-B143-A3EBCF2520E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B43DAD91-4A0E-4BA5-B143-A3EBCF2520E8}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{B43DAD91-4A0E-4BA5-B143-A3EBCF2520E8}.Debug|ARM.Build.0 = Debug|Any CPU
+		{B43DAD91-4A0E-4BA5-B143-A3EBCF2520E8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B43DAD91-4A0E-4BA5-B143-A3EBCF2520E8}.Debug|x64.Build.0 = Debug|Any CPU
+		{B43DAD91-4A0E-4BA5-B143-A3EBCF2520E8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B43DAD91-4A0E-4BA5-B143-A3EBCF2520E8}.Debug|x86.Build.0 = Debug|Any CPU
+		{B43DAD91-4A0E-4BA5-B143-A3EBCF2520E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B43DAD91-4A0E-4BA5-B143-A3EBCF2520E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B43DAD91-4A0E-4BA5-B143-A3EBCF2520E8}.Release|ARM.ActiveCfg = Release|Any CPU
+		{B43DAD91-4A0E-4BA5-B143-A3EBCF2520E8}.Release|ARM.Build.0 = Release|Any CPU
+		{B43DAD91-4A0E-4BA5-B143-A3EBCF2520E8}.Release|x64.ActiveCfg = Release|Any CPU
+		{B43DAD91-4A0E-4BA5-B143-A3EBCF2520E8}.Release|x64.Build.0 = Release|Any CPU
+		{B43DAD91-4A0E-4BA5-B143-A3EBCF2520E8}.Release|x86.ActiveCfg = Release|Any CPU
+		{B43DAD91-4A0E-4BA5-B143-A3EBCF2520E8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
