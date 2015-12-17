@@ -33,6 +33,11 @@ namespace KitchenNotesWeb.Controllers
             return View();
         }
 
+        public ActionResult UserInfo()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Login(User user)
         {
@@ -77,6 +82,8 @@ namespace KitchenNotesWeb.Controllers
                     if (!KitchenNotesUser.UserNameExists(userReg.UserName))
                     {
                         KitchenNotesUser.addNewUserToExistingHub(newUser, HubId);
+                        FormsAuthentication.SetAuthCookie(newUser.Username, true);
+                        return RedirectToAction("Index", "Home");
                     }
                     else
                     {

@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{ea950be8-7591-44fb-9db6-40f2cf6c9d10}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureDatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -66,5 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="KitchNotesDatabase.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="KitchNotesDatabaseAzure.publish.xml" />
   </ItemGroup>
 </Project>

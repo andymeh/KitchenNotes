@@ -4,6 +4,10 @@ C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Kitc
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Antlr3.Runtime.dll
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\EntityFramework.dll
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\EntityFramework.SqlServer.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Forloop.HtmlHelpers.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Helpers.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\KitchenNotesBLL.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\KitchenNotesDAL.dll
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Microsoft.AspNet.Identity.Core.dll
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Microsoft.AspNet.Identity.Owin.dll
@@ -31,6 +35,10 @@ C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Syst
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\System.Web.WebPages.dll
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\System.Web.WebPages.Razor.dll
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\WebGrease.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Helpers.pdb
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\KitchenNotesBLL.pdb
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\KitchenNotesDAL.pdb
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Forloop.HtmlHelpers.xml
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Newtonsoft.Json.xml
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\System.Net.Http.Formatting.xml
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\System.Web.Helpers.xml
@@ -61,11 +69,3 @@ C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Syst
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\obj\Debug\KitchenNotesWeb.csprojResolveAssemblyReference.cache
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\obj\Debug\KitchenNotesWeb.dll
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\obj\Debug\KitchenNotesWeb.pdb
-C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\KitchenNotesBLL.dll
-C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\KitchenNotesDAL.dll
-C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\KitchenNotesBLL.pdb
-C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\KitchenNotesDAL.pdb
-C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Helpers.dll
-C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Helpers.pdb
-C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Forloop.HtmlHelpers.dll
-C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Forloop.HtmlHelpers.xml

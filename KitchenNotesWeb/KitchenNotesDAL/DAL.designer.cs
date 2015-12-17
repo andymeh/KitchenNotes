@@ -22,7 +22,7 @@ namespace KitchenNotesDAL
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="KitchNotesDatabase")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="KitchenNotesDatabase")]
 	public partial class DALDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -45,7 +45,7 @@ namespace KitchenNotesDAL
     #endregion
 		
 		public DALDataContext() : 
-				base(global::KitchenNotesDAL.Properties.Settings.Default.KitchNotesDBConnectionString, mappingSource)
+				base(global::KitchenNotesDAL.Properties.Settings.Default.KitchenNotesDatabaseConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
