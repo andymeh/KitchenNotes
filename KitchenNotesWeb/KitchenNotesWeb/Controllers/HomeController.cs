@@ -19,13 +19,48 @@ namespace KitchenNotesWeb.Controllers
             return View();
         }
 
-        [Route("AddHub")]
-        public string HubNameDos()
+        [Route("HubName")]
+        public string HubName(string username)
         {
-            Hub hubName = KitchenNotesHub.getHub("Andy");
+            if (username != "")
+            {
+                List<string> HubIdReferences = new List<string>();
+                User user = KitchenNotesUser.getUser(username);
 
-            return hubName.HubName;
+                List<UserHub> lstUserHubs = KitchenNotesHub.lstUserHubs(user.UserId);
+                Hub uHub = KitchenNotesHub.getHub(lstUserHubs.First().HubId);
+
+
+                return uHub.HubName;
+            }
+            else
+            {
+                return "";
+            }
         }
+        [Route("HubIdRefs")]
+        public string HubIdRefs(string username)
+        {
+            if(username != "")
+            {
+                List<string> HubIdReferences = new List<string>();
+                User user = KitchenNotesUser.getUser(username);
+
+                List<UserHub> lstUserHubs = KitchenNotesHub.lstUserHubs(user.UserId);
+
+                foreach (UserHub uh in lstUserHubs)
+                {
+                    HubIdReferences.Add(uh.HubId.ToString().Substring(0, 8));
+                }
+                return HubIdReferences.First(); ;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+
 
 
     }

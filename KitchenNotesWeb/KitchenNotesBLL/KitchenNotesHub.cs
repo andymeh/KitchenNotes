@@ -22,6 +22,15 @@ namespace KitchenNotesBLL
             }
         }
 
+        public static List<UserHub> lstUserHubs(Guid userId)
+        {
+            using(var dc = new DALDataContext())
+            {
+                List<UserHub> lstUserHubs = dc.UserHubs.Where(x => x.UserId == userId).ToList();
+                return lstUserHubs;
+            }
+        }
+
         public static Guid addHubReturnId(string newHubName)
         {
             Hub newHub = Entities.createHub(newHubName);
@@ -43,7 +52,17 @@ namespace KitchenNotesBLL
             }
             return oHub;
         }
-        
+
+        public static Hub getHub(Guid Hubid)
+        {
+            Hub oHub = new Hub();
+            using (var dc = new DALDataContext())
+            {
+                oHub = dc.Hubs.FirstOrDefault(x => x.HubId == Hubid);
+            }
+            return oHub;
+        }
+
     }
 
     public class KitchenNotesUser
@@ -60,6 +79,23 @@ namespace KitchenNotesBLL
                 else
                 {
                     return true;
+                }
+            }
+        }
+
+        public static User getUser(string username)
+        {
+            using (var db = new DALDataContext())
+            {
+                List<User> user = db.Users.Where(x => x.Username == username).ToList();
+
+                if (user.Count == 0)
+                {
+                    return user.FirstOrDefault(); ;
+                }
+                else
+                {
+                    return user.FirstOrDefault();
                 }
             }
         }
