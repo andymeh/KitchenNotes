@@ -6,6 +6,5 @@
 	[Surname] NVARCHAR(50) NOT NULL, 
     [Password] NCHAR(40) NOT NULL, 
     [DOB] DATE NOT NULL, 
-    [Email] NCHAR(30) NOT NULL, 
-    [RememberMe] BIT NOT NULL
+    [Email] NCHAR(30) NOT NULL
 )

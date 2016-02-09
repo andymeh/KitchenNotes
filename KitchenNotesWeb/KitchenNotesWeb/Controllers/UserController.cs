@@ -45,7 +45,7 @@ namespace KitchenNotesWeb.Controllers
             {
                 if (KitchenNotesUser.isUserValid(user.Username, user.Password))
                 {
-                    FormsAuthentication.SetAuthCookie(user.Username, user.RememberMe);
+                    FormsAuthentication.SetAuthCookie(user.Username, true);
                     return RedirectToAction("Index", "Home");
                 }
                 else

@@ -166,6 +166,43 @@ namespace KitchenNotesBLL
             }
         }
     }
+
+    public class KitchenNotesNotes
+    {
+        public static void addNewNote(Guid _userHubId, string _note)
+        {
+            using(var db = new DALDataContext())
+            {
+                Notes newNote = new Notes { NoteId = Guid.NewGuid(), UserHubId = _userHubId, DateAdded = DateTime.Now, Note = _note };
+                db.Notes.InsertOnSubmit(newNote);
+                db.SubmitChanges();
+            }
+        }
+
+        public static List<Notes> getAllHubNotes(Guid _hubId)
+        {
+            using (var db = new DALDataContext())
+            {
+                List<Notes> hubNotes = new List<Notes>();
+                List<UserHub> lstUserHub = db.UserHubs.Where(i => i.HubId == _hubId).ToList();
+                if(lstUserHub != null && lstUserHub.Count != 0 )
+                {
+                    List<Guid> lstUserHubIds = new List<Guid>();
+                    foreach (UserHub uh in lstUserHub)
+                    {
+                        lstUserHubIds.Add(uh.UserHubId);
+                    }
+                    foreach(Guid x in lstUserHubIds)
+                    {
+                        hubNotes.AddRange(db.Notes.Where(i => i.UserHubId == x));
+                    }
+
+                }
+                return hubNotes;
+            }
+            
+        }
+    }
     
     public class Entities
     {

@@ -9,6 +9,7 @@ namespace KitchenNotesWeb.Controllers
     public class TasksController : Controller
     {
         // GET: Tasks
+        [Authorize]
         public ActionResult Index()
         {
             return View();

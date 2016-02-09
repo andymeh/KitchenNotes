@@ -22,7 +22,7 @@ namespace KitchenNotesDAL
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="KitchenNotesDatabase")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="KitchNotesDatabase")]
 	public partial class DALDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -33,19 +33,19 @@ namespace KitchenNotesDAL
     partial void InsertHub(Hub instance);
     partial void UpdateHub(Hub instance);
     partial void DeleteHub(Hub instance);
-    partial void InsertNote(Note instance);
-    partial void UpdateNote(Note instance);
-    partial void DeleteNote(Note instance);
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
+    partial void InsertNotes(Notes instance);
+    partial void UpdateNotes(Notes instance);
+    partial void DeleteNotes(Notes instance);
     partial void InsertUserHub(UserHub instance);
     partial void UpdateUserHub(UserHub instance);
     partial void DeleteUserHub(UserHub instance);
+    partial void InsertUser(User instance);
+    partial void UpdateUser(User instance);
+    partial void DeleteUser(User instance);
     #endregion
 		
 		public DALDataContext() : 
-				base(global::KitchenNotesDAL.Properties.Settings.Default.KitchenNotesDatabaseConnectionString, mappingSource)
+				base(global::KitchenNotesDAL.Properties.Settings.Default.KitchNotesDatabaseConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -82,19 +82,11 @@ namespace KitchenNotesDAL
 			}
 		}
 		
-		public System.Data.Linq.Table<Note> Notes
+		public System.Data.Linq.Table<Notes> Notes
 		{
 			get
 			{
-				return this.GetTable<Note>();
-			}
-		}
-		
-		public System.Data.Linq.Table<User> Users
-		{
-			get
-			{
-				return this.GetTable<User>();
+				return this.GetTable<Notes>();
 			}
 		}
 		
@@ -103,6 +95,14 @@ namespace KitchenNotesDAL
 			get
 			{
 				return this.GetTable<UserHub>();
+			}
+		}
+		
+		public System.Data.Linq.Table<User> Users
+		{
+			get
+			{
+				return this.GetTable<User>();
 			}
 		}
 	}
@@ -117,6 +117,10 @@ namespace KitchenNotesDAL
 		
 		private string _HubName;
 		
+		private string _HubAddress;
+		
+		private string _HubLocation;
+		
 		private EntitySet<UserHub> _UserHubs;
 		
     #region Extensibility Method Definitions
@@ -127,6 +131,10 @@ namespace KitchenNotesDAL
     partial void OnHubIdChanged();
     partial void OnHubNameChanging(string value);
     partial void OnHubNameChanged();
+    partial void OnHubAddressChanging(string value);
+    partial void OnHubAddressChanged();
+    partial void OnHubLocationChanging(string value);
+    partial void OnHubLocationChanged();
     #endregion
 		
 		public Hub()
@@ -171,6 +179,46 @@ namespace KitchenNotesDAL
 					this._HubName = value;
 					this.SendPropertyChanged("HubName");
 					this.OnHubNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HubAddress", DbType="NChar(100)")]
+		public string HubAddress
+		{
+			get
+			{
+				return this._HubAddress;
+			}
+			set
+			{
+				if ((this._HubAddress != value))
+				{
+					this.OnHubAddressChanging(value);
+					this.SendPropertyChanging();
+					this._HubAddress = value;
+					this.SendPropertyChanged("HubAddress");
+					this.OnHubAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HubLocation", DbType="NChar(20)")]
+		public string HubLocation
+		{
+			get
+			{
+				return this._HubLocation;
+			}
+			set
+			{
+				if ((this._HubLocation != value))
+				{
+					this.OnHubLocationChanging(value);
+					this.SendPropertyChanging();
+					this._HubLocation = value;
+					this.SendPropertyChanged("HubLocation");
+					this.OnHubLocationChanged();
 				}
 			}
 		}
@@ -222,18 +270,22 @@ namespace KitchenNotesDAL
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Notes")]
-	public partial class Note : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Notes : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private System.Guid _NoteId;
 		
-		private string _Note1;
+		private string _Note;
 		
 		private System.DateTime _DateAdded;
 		
 		private System.Nullable<System.Guid> _UserHubId;
+		
+		private System.Nullable<System.DateTime> _DateEdited;
+		
+		private System.Nullable<System.DateTime> _DateHidden;
 		
 		private EntityRef<UserHub> _UserHub;
 		
@@ -243,15 +295,19 @@ namespace KitchenNotesDAL
     partial void OnCreated();
     partial void OnNoteIdChanging(System.Guid value);
     partial void OnNoteIdChanged();
-    partial void OnNote1Changing(string value);
-    partial void OnNote1Changed();
+    partial void OnNoteChanging(string value);
+    partial void OnNoteChanged();
     partial void OnDateAddedChanging(System.DateTime value);
     partial void OnDateAddedChanged();
     partial void OnUserHubIdChanging(System.Nullable<System.Guid> value);
     partial void OnUserHubIdChanged();
+    partial void OnDateEditedChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateEditedChanged();
+    partial void OnDateHiddenChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateHiddenChanged();
     #endregion
 		
-		public Note()
+		public Notes()
 		{
 			this._UserHub = default(EntityRef<UserHub>);
 			OnCreated();
@@ -277,22 +333,22 @@ namespace KitchenNotesDAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Note", Storage="_Note1", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string Note1
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Note
 		{
 			get
 			{
-				return this._Note1;
+				return this._Note;
 			}
 			set
 			{
-				if ((this._Note1 != value))
+				if ((this._Note != value))
 				{
-					this.OnNote1Changing(value);
+					this.OnNoteChanging(value);
 					this.SendPropertyChanging();
-					this._Note1 = value;
-					this.SendPropertyChanged("Note1");
-					this.OnNote1Changed();
+					this._Note = value;
+					this.SendPropertyChanged("Note");
+					this.OnNoteChanged();
 				}
 			}
 		}
@@ -341,7 +397,47 @@ namespace KitchenNotesDAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserHub_Note", Storage="_UserHub", ThisKey="UserHubId", OtherKey="UserHubId", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateEdited", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateEdited
+		{
+			get
+			{
+				return this._DateEdited;
+			}
+			set
+			{
+				if ((this._DateEdited != value))
+				{
+					this.OnDateEditedChanging(value);
+					this.SendPropertyChanging();
+					this._DateEdited = value;
+					this.SendPropertyChanged("DateEdited");
+					this.OnDateEditedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateHidden", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateHidden
+		{
+			get
+			{
+				return this._DateHidden;
+			}
+			set
+			{
+				if ((this._DateHidden != value))
+				{
+					this.OnDateHiddenChanging(value);
+					this.SendPropertyChanging();
+					this._DateHidden = value;
+					this.SendPropertyChanged("DateHidden");
+					this.OnDateHiddenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserHub_Notes", Storage="_UserHub", ThisKey="UserHubId", OtherKey="UserHubId", IsForeignKey=true)]
 		public UserHub UserHub
 		{
 			get
@@ -396,6 +492,250 @@ namespace KitchenNotesDAL
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserHub")]
+	public partial class UserHub : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _UserHubId;
+		
+		private System.Guid _UserId;
+		
+		private System.Guid _HubId;
+		
+		private bool _HubAdmin;
+		
+		private EntitySet<Notes> _Notes;
+		
+		private EntityRef<Hub> _Hub;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUserHubIdChanging(System.Guid value);
+    partial void OnUserHubIdChanged();
+    partial void OnUserIdChanging(System.Guid value);
+    partial void OnUserIdChanged();
+    partial void OnHubIdChanging(System.Guid value);
+    partial void OnHubIdChanged();
+    partial void OnHubAdminChanging(bool value);
+    partial void OnHubAdminChanged();
+    #endregion
+		
+		public UserHub()
+		{
+			this._Notes = new EntitySet<Notes>(new Action<Notes>(this.attach_Notes), new Action<Notes>(this.detach_Notes));
+			this._Hub = default(EntityRef<Hub>);
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserHubId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid UserHubId
+		{
+			get
+			{
+				return this._UserHubId;
+			}
+			set
+			{
+				if ((this._UserHubId != value))
+				{
+					this.OnUserHubIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserHubId = value;
+					this.SendPropertyChanged("UserHubId");
+					this.OnUserHubIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HubId", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid HubId
+		{
+			get
+			{
+				return this._HubId;
+			}
+			set
+			{
+				if ((this._HubId != value))
+				{
+					if (this._Hub.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnHubIdChanging(value);
+					this.SendPropertyChanging();
+					this._HubId = value;
+					this.SendPropertyChanged("HubId");
+					this.OnHubIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HubAdmin", DbType="Bit NOT NULL")]
+		public bool HubAdmin
+		{
+			get
+			{
+				return this._HubAdmin;
+			}
+			set
+			{
+				if ((this._HubAdmin != value))
+				{
+					this.OnHubAdminChanging(value);
+					this.SendPropertyChanging();
+					this._HubAdmin = value;
+					this.SendPropertyChanged("HubAdmin");
+					this.OnHubAdminChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserHub_Notes", Storage="_Notes", ThisKey="UserHubId", OtherKey="UserHubId")]
+		public EntitySet<Notes> Notes
+		{
+			get
+			{
+				return this._Notes;
+			}
+			set
+			{
+				this._Notes.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Hub_UserHub", Storage="_Hub", ThisKey="HubId", OtherKey="HubId", IsForeignKey=true)]
+		public Hub Hub
+		{
+			get
+			{
+				return this._Hub.Entity;
+			}
+			set
+			{
+				Hub previousValue = this._Hub.Entity;
+				if (((previousValue != value) 
+							|| (this._Hub.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Hub.Entity = null;
+						previousValue.UserHubs.Remove(this);
+					}
+					this._Hub.Entity = value;
+					if ((value != null))
+					{
+						value.UserHubs.Add(this);
+						this._HubId = value.HubId;
+					}
+					else
+					{
+						this._HubId = default(System.Guid);
+					}
+					this.SendPropertyChanged("Hub");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserHub", Storage="_User", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.UserHubs.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.UserHubs.Add(this);
+						this._UserId = value.UserId;
+					}
+					else
+					{
+						this._UserId = default(System.Guid);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Notes(Notes entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserHub = this;
+		}
+		
+		private void detach_Notes(Notes entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserHub = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
 	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -415,8 +755,6 @@ namespace KitchenNotesDAL
 		private System.DateTime _DOB;
 		
 		private string _Email;
-		
-		private bool _RememberMe;
 		
 		private EntitySet<UserHub> _UserHubs;
 		
@@ -438,8 +776,6 @@ namespace KitchenNotesDAL
     partial void OnDOBChanged();
     partial void OnEmailChanging(string value);
     partial void OnEmailChanged();
-    partial void OnRememberMeChanging(bool value);
-    partial void OnRememberMeChanged();
     #endregion
 		
 		public User()
@@ -588,26 +924,6 @@ namespace KitchenNotesDAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RememberMe", DbType="Bit NOT NULL")]
-		public bool RememberMe
-		{
-			get
-			{
-				return this._RememberMe;
-			}
-			set
-			{
-				if ((this._RememberMe != value))
-				{
-					this.OnRememberMeChanging(value);
-					this.SendPropertyChanging();
-					this._RememberMe = value;
-					this.SendPropertyChanged("RememberMe");
-					this.OnRememberMeChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserHub", Storage="_UserHubs", ThisKey="UserId", OtherKey="UserId")]
 		public EntitySet<UserHub> UserHubs
 		{
@@ -651,226 +967,6 @@ namespace KitchenNotesDAL
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserHub")]
-	public partial class UserHub : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _UserHubId;
-		
-		private System.Guid _UserId;
-		
-		private System.Guid _HubId;
-		
-		private EntitySet<Note> _Notes;
-		
-		private EntityRef<Hub> _Hub;
-		
-		private EntityRef<User> _User;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUserHubIdChanging(System.Guid value);
-    partial void OnUserHubIdChanged();
-    partial void OnUserIdChanging(System.Guid value);
-    partial void OnUserIdChanged();
-    partial void OnHubIdChanging(System.Guid value);
-    partial void OnHubIdChanged();
-    #endregion
-		
-		public UserHub()
-		{
-			this._Notes = new EntitySet<Note>(new Action<Note>(this.attach_Notes), new Action<Note>(this.detach_Notes));
-			this._Hub = default(EntityRef<Hub>);
-			this._User = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserHubId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid UserHubId
-		{
-			get
-			{
-				return this._UserHubId;
-			}
-			set
-			{
-				if ((this._UserHubId != value))
-				{
-					this.OnUserHubIdChanging(value);
-					this.SendPropertyChanging();
-					this._UserHubId = value;
-					this.SendPropertyChanged("UserHubId");
-					this.OnUserHubIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid UserId
-		{
-			get
-			{
-				return this._UserId;
-			}
-			set
-			{
-				if ((this._UserId != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._UserId = value;
-					this.SendPropertyChanged("UserId");
-					this.OnUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HubId", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid HubId
-		{
-			get
-			{
-				return this._HubId;
-			}
-			set
-			{
-				if ((this._HubId != value))
-				{
-					if (this._Hub.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnHubIdChanging(value);
-					this.SendPropertyChanging();
-					this._HubId = value;
-					this.SendPropertyChanged("HubId");
-					this.OnHubIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserHub_Note", Storage="_Notes", ThisKey="UserHubId", OtherKey="UserHubId")]
-		public EntitySet<Note> Notes
-		{
-			get
-			{
-				return this._Notes;
-			}
-			set
-			{
-				this._Notes.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Hub_UserHub", Storage="_Hub", ThisKey="HubId", OtherKey="HubId", IsForeignKey=true)]
-		public Hub Hub
-		{
-			get
-			{
-				return this._Hub.Entity;
-			}
-			set
-			{
-				Hub previousValue = this._Hub.Entity;
-				if (((previousValue != value) 
-							|| (this._Hub.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Hub.Entity = null;
-						previousValue.UserHubs.Remove(this);
-					}
-					this._Hub.Entity = value;
-					if ((value != null))
-					{
-						value.UserHubs.Add(this);
-						this._HubId = value.HubId;
-					}
-					else
-					{
-						this._HubId = default(System.Guid);
-					}
-					this.SendPropertyChanged("Hub");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserHub", Storage="_User", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.UserHubs.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.UserHubs.Add(this);
-						this._UserId = value.UserId;
-					}
-					else
-					{
-						this._UserId = default(System.Guid);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Notes(Note entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserHub = this;
-		}
-		
-		private void detach_Notes(Note entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserHub = null;
 		}
 	}
 }

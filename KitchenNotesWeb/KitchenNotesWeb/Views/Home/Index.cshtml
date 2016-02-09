@@ -4,28 +4,84 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!-- Page Heading -->
-<div class="row">
-    <div class="col-lg-12">
-        @if (Request.IsAuthenticated)
-        {
+@if (Request.IsAuthenticated)
+{
+    <div class="row">
+        <div class="col-lg-12">
+
 
             <h1>Welcome @Html.Encode(User.Identity.Name)</h1>
             <h3 class="media-body">HubID : @{Html.RenderAction("HubIdRefs", "Home", new { username = User.Identity.Name });} </h3>
             <h3>Share this ID with people you want to invite to this Hub</h3>
-                }
-                else
-                {
-            <h1>Please Sign in Or Register</h1>
+
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-comments fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">26</div>
+                            <div>New Comments!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-tasks fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">12</div>
+                            <div>New Tasks!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+}
+
+
+else
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <h1> Please Sign in Or Register</h1>
             <ul class="list-group">
                 <li><button type="button" class="btn btn-success btn-lg" onclick="location.href='@Url.Action("Register", "User")'">Register new Hub</button></li>
                 <li><button type="button" class="btn btn-info btn-lg" onclick="location.href='@Url.Action("NewUser", "User")'">Join a Hub</button></li>
                 <li><button type="button" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("Login", "User")'">Sign In</button></li>
             </ul>
-        }
-    </div>
-</div>
+        </div>
+     </div>
+}
+
+
+
+
+
 <!-- /.row -->
-    
-
-
-

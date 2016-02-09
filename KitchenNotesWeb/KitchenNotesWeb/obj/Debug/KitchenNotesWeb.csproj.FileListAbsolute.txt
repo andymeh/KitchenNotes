@@ -1,3 +1,4 @@
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\obj\Debug\KitchenNotesWeb.csprojResolveAssemblyReference.cache
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\KitchenNotesWeb.dll.config
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\KitchenNotesWeb.dll
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\KitchenNotesWeb.pdb
@@ -38,6 +39,8 @@ C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\WebG
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Helpers.pdb
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\KitchenNotesBLL.pdb
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\KitchenNotesDAL.pdb
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\EntityFramework.xml
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\EntityFramework.SqlServer.xml
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Forloop.HtmlHelpers.xml
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Newtonsoft.Json.xml
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\System.Net.Http.Formatting.xml
@@ -51,8 +54,6 @@ C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Syst
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\System.Web.WebPages.Razor.xml
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Antlr3.Runtime.pdb
-C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\EntityFramework.xml
-C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\EntityFramework.SqlServer.xml
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Microsoft.AspNet.Identity.Core.xml
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Microsoft.AspNet.Identity.EntityFramework.xml
@@ -66,6 +67,5 @@ C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Micr
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\bin\System.Web.Http.Owin.xml
-C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\obj\Debug\KitchenNotesWeb.csprojResolveAssemblyReference.cache
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\obj\Debug\KitchenNotesWeb.dll
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesWeb\obj\Debug\KitchenNotesWeb.pdb
