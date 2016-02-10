@@ -20,7 +20,7 @@
         <elementListCompartment Id="2dc691e4-735e-41ce-9402-ac60d4582023" absoluteBounds="3.5149999999999997, 1.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.5 : 2.10659912109375); (6.375 : 2.10659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 2.10659912109375); (6.375 : 2.10659912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DALDataContext/UserHub/UserHub_Notes" />
       <nodes>
         <classShapeMoniker Id="7e82e17e-161a-4bc9-adef-8d343a112d7a" />
@@ -34,16 +34,16 @@
         <classShapeMoniker Id="7e82e17e-161a-4bc9-adef-8d343a112d7a" />
       </nodes>
     </associationConnector>
-    <classShape Id="32cff4ac-564c-401a-aeda-e834445b3de0" absoluteBounds="3.375, 4.25, 2, 2.1554996744791666">
+    <classShape Id="bd2c3f85-36e4-4320-aba1-25aeef4f9d07" absoluteBounds="5.25, 3.75, 2, 2.3478011067708335">
       <DataClassMoniker Name="/DALDataContext/User" />
       <nestedChildShapes>
-        <elementListCompartment Id="ac7e190b-0fe6-4099-b448-a89c194a0439" absoluteBounds="3.3899999999999997, 4.71, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="d0f33630-db3d-4add-9e52-18d228ed587f" absoluteBounds="5.265, 4.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(4.4375 : 4.25); (4.4375 : 2.95359537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.9375025 : 3.75); (5.9375025 : 2.92714680989583); (5.5 : 2.92714680989583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DALDataContext/User/User_UserHub" />
       <nodes>
-        <classShapeMoniker Id="32cff4ac-564c-401a-aeda-e834445b3de0" />
+        <classShapeMoniker Id="bd2c3f85-36e4-4320-aba1-25aeef4f9d07" />
         <classShapeMoniker Id="7e82e17e-161a-4bc9-adef-8d343a112d7a" />
       </nodes>
     </associationConnector>

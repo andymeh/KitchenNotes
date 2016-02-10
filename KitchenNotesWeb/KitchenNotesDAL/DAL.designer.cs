@@ -756,6 +756,8 @@ namespace KitchenNotesDAL
 		
 		private string _Email;
 		
+		private System.Guid _CurrentHub;
+		
 		private EntitySet<UserHub> _UserHubs;
 		
     #region Extensibility Method Definitions
@@ -776,6 +778,8 @@ namespace KitchenNotesDAL
     partial void OnDOBChanged();
     partial void OnEmailChanging(string value);
     partial void OnEmailChanged();
+    partial void OnCurrentHubChanging(System.Guid value);
+    partial void OnCurrentHubChanged();
     #endregion
 		
 		public User()
@@ -920,6 +924,26 @@ namespace KitchenNotesDAL
 					this._Email = value;
 					this.SendPropertyChanged("Email");
 					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CurrentHub", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid CurrentHub
+		{
+			get
+			{
+				return this._CurrentHub;
+			}
+			set
+			{
+				if ((this._CurrentHub != value))
+				{
+					this.OnCurrentHubChanging(value);
+					this.SendPropertyChanging();
+					this._CurrentHub = value;
+					this.SendPropertyChanged("CurrentHub");
+					this.OnCurrentHubChanged();
 				}
 			}
 		}

@@ -66,11 +66,7 @@ namespace KitchenNotesWeb.Controllers
             if (username != "")
             {
                 User user = KitchenNotesUser.getUser(username);
-
-                List<UserHub> lstUserHubs = KitchenNotesHub.lstUserHubs(user.UserId);
-
-                notes = KitchenNotesNotes.getAllHubNotes(lstUserHubs.First().HubId);
-
+                notes = KitchenNotesNotes.getAllHubNotes(user.CurrentHub);
             }
             return notes;
         }
@@ -96,6 +92,9 @@ namespace KitchenNotesWeb.Controllers
             }
             return RedirectToAction("Index", "Notes");
         }
+
+        public 
+        
 
 
     }

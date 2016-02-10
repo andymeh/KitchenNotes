@@ -26,9 +26,8 @@ namespace KitchenNotesWeb.Controllers
             {
                 List<string> HubIdReferences = new List<string>();
                 User user = KitchenNotesUser.getUser(username);
-
-                List<UserHub> lstUserHubs = KitchenNotesHub.lstUserHubs(user.UserId);
-                Hub uHub = KitchenNotesHub.getHub(lstUserHubs.First().HubId);
+                
+                Hub uHub = KitchenNotesHub.getHub(user.CurrentHub);
 
 
                 return uHub.HubName;
@@ -41,23 +40,15 @@ namespace KitchenNotesWeb.Controllers
         [Route("HubIdRefs")]
         public string HubIdRefs(string username)
         {
-            if(username != "")
+            string HubIdReference = "";
+            if (username != "")
             {
-                List<string> HubIdReferences = new List<string>();
+                
                 User user = KitchenNotesUser.getUser(username);
+                HubIdReference = user.CurrentHub.ToString().Substring(0, 8);
 
-                List<UserHub> lstUserHubs = KitchenNotesHub.lstUserHubs(user.UserId);
-
-                foreach (UserHub uh in lstUserHubs)
-                {
-                    HubIdReferences.Add(uh.HubId.ToString().Substring(0, 8));
-                }
-                return HubIdReferences.First(); ;
             }
-            else
-            {
-                return "";
-            }
+            return HubIdReference;
         }
 
 

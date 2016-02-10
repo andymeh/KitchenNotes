@@ -40,6 +40,7 @@
       <Column Name="Password" Type="System.String" DbType="NChar(40) NOT NULL" CanBeNull="false" />
       <Column Name="DOB" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="Email" Type="System.String" DbType="NChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="CurrentHub" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Association Name="User_UserHub" Member="UserHubs" ThisKey="UserId" OtherKey="UserId" Type="UserHub" />
     </Type>
   </Table>

@@ -202,6 +202,54 @@ namespace KitchenNotesBLL
             }
             
         }
+
+        public static List<Notes> getAllUserHubNotes(Guid _UserHubId)
+        {
+            using (var db = new DALDataContext())
+            {
+                List<Notes> hubNotes = new List<Notes>();
+                List<UserHub> lstUserHub = db.UserHubs.Where(i => i.UserHubId == _UserHubId).ToList();
+                if (lstUserHub != null && lstUserHub.Count != 0)
+                {
+                    List<Guid> lstUserHubIds = new List<Guid>();
+                    foreach (UserHub uh in lstUserHub)
+                    {
+                        lstUserHubIds.Add(uh.UserHubId);
+                    }
+                    foreach (Guid x in lstUserHubIds)
+                    {
+                        hubNotes.AddRange(db.Notes.Where(i => i.UserHubId == x));
+                    }
+
+                }
+                return hubNotes;
+            }
+
+        }
+
+        public static List<Notes> getAllUserNotes(Guid _UserId)
+        {
+            using (var db = new DALDataContext())
+            {
+                List<Notes> hubNotes = new List<Notes>();
+                List<UserHub> lstUserHub = db.UserHubs.Where(i => i.UserId == _UserId).ToList();
+                if (lstUserHub != null && lstUserHub.Count != 0)
+                {
+                    List<Guid> lstUserHubIds = new List<Guid>();
+                    foreach (UserHub uh in lstUserHub)
+                    {
+                        lstUserHubIds.Add(uh.UserHubId);
+                    }
+                    foreach (Guid x in lstUserHubIds)
+                    {
+                        hubNotes.AddRange(db.Notes.Where(i => i.UserHubId == x));
+                    }
+
+                }
+                return hubNotes;
+            }
+
+        }
     }
     
     public class Entities

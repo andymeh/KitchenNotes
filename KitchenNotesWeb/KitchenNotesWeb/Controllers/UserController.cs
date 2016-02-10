@@ -76,7 +76,8 @@ namespace KitchenNotesWeb.Controllers
                         Surname = userReg.Surname,
                         Email = userReg.UserEmail,
                         DOB = userReg.DOB,
-                        Password = SHA1.Encode(userReg.Password)
+                        Password = SHA1.Encode(userReg.Password),
+                        CurrentHub = HubId
                     };
 
                     if (!KitchenNotesUser.UserNameExists(userReg.UserName))
@@ -116,7 +117,8 @@ namespace KitchenNotesWeb.Controllers
                             Surname = nUser.Surname,
                             Email = nUser.UserEmail,
                             DOB = nUser.DOB,
-                            Password = SHA1.Encode(nUser.Password)
+                            Password = SHA1.Encode(nUser.Password),
+                            CurrentHub = HubId
                         };
 
                         if (!KitchenNotesUser.UserNameExists(nUser.UserName))
@@ -139,6 +141,13 @@ namespace KitchenNotesWeb.Controllers
                 }
             }
             return View(nUser);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public void ChangeHub(string cHubId)
+        {
+
         }
 
     }
