@@ -9,26 +9,38 @@
       <Association Name="Hub_UserHub" Member="UserHubs" ThisKey="HubId" OtherKey="HubId" Type="UserHub" />
     </Type>
   </Table>
+  <Table Name="dbo.HubEvents" Member="HubEvents">
+    <Type Name="HubEvent">
+      <Column Name="HubEventId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserHubId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NChar(300)" CanBeNull="true" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Importance" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Association Name="UserHub_HubEvent" Member="UserHub" ThisKey="UserHubId" OtherKey="UserHubId" Type="UserHub" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Notes" Member="Notes">
     <Type Name="Notes">
       <Column Name="NoteId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Note" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="DateAdded" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="UserHubId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="UserHubId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="DateEdited" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="DateHidden" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="UserHub_Notes" Member="UserHub" ThisKey="UserHubId" OtherKey="UserHubId" Type="UserHub" IsForeignKey="true" />
+      <Association Name="UserHub_Note" Member="UserHub" ThisKey="UserHubId" OtherKey="UserHubId" Type="UserHub" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.UserHub" Member="UserHubs">
-    <Type Name="UserHub">
-      <Column Name="UserHubId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="HubId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="HubAdmin" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="UserHub_Notes" Member="Notes" ThisKey="UserHubId" OtherKey="UserHubId" Type="Notes" />
-      <Association Name="Hub_UserHub" Member="Hub" ThisKey="HubId" OtherKey="HubId" Type="Hub" IsForeignKey="true" />
-      <Association Name="User_UserHub" Member="User" ThisKey="UserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
+  <Table Name="dbo.Tasks" Member="Tasks">
+    <Type Name="Task">
+      <Column Name="TaskId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TaskDetail" Type="System.String" DbType="NChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="AssignedTo" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="UserHubId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Completed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Hidden" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="UserHub_Task" Member="UserHub" ThisKey="UserHubId" OtherKey="UserHubId" Type="UserHub" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.[User]" Member="Users">
@@ -41,7 +53,21 @@
       <Column Name="DOB" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="Email" Type="System.String" DbType="NChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="CurrentHub" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="LastLogin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="User_UserHub" Member="UserHubs" ThisKey="UserId" OtherKey="UserId" Type="UserHub" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserHub" Member="UserHubs">
+    <Type Name="UserHub">
+      <Column Name="UserHubId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="HubId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="HubAdmin" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="UserHub_HubEvent" Member="HubEvents" ThisKey="UserHubId" OtherKey="UserHubId" Type="HubEvent" />
+      <Association Name="UserHub_Note" Member="Notes" ThisKey="UserHubId" OtherKey="UserHubId" Type="Notes" />
+      <Association Name="UserHub_Task" Member="Tasks" ThisKey="UserHubId" OtherKey="UserHubId" Type="Task" />
+      <Association Name="Hub_UserHub" Member="Hub" ThisKey="HubId" OtherKey="HubId" Type="Hub" IsForeignKey="true" />
+      <Association Name="User_UserHub" Member="User" ThisKey="UserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

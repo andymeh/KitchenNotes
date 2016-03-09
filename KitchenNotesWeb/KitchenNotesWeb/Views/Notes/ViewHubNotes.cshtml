@@ -1,37 +1,39 @@
-﻿@model IEnumerable<KitchenNotesDAL.Notes>
+﻿@model IEnumerable<KitchenNotesWeb.Models.DetailedNoteModel>
+@{string IsUserAdmin = Html.Action("IsUserAdmin", "Notes").ToString();}
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Note)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateAdded)
-        </th>
-        <th></th>
-    </tr>
+
 @if (Model != null && Model.Count() > 0)
 {
     foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Note)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateAdded)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.NoteId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.NoteId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.NoteId })
-            </td>
-        </tr>
+        <div class="col-lg-2">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-newspaper-o fa-fw"></i> @Html.DisplayFor(modelItem => item.username) : @Html.DisplayFor(modelItem => item.forename) </h3>
+
+                </div>
+                <div class="panel-body" style="word-wrap:break-word;">
+                    @Html.DisplayFor(modelItem => item.timeAgo)
+                    <h4>
+                        @Html.DisplayFor(modelItem => item.note.Note)
+                    </h4>
+                    
+            
+                    @if ( string.Equals(item.username, User.Identity.Name, StringComparison.CurrentCultureIgnoreCase) || IsUserAdmin.Equals("True"))
+                    {
+                        @*<a href='@Url.Action("DeleteNote", "Notes", new { NoteId = item.note.NoteId })'>Edit </a>*@
+                        <a style="float:right" href='@Url.Action("DeleteNote", "Notes", new { NoteId = item.note.NoteId })'> <i class="glyphicon glyphicon-trash"></i></a>
+                    }
+                </div>
+            </div>
+        </div>
     }
 }
 
 
-</table>
+
+
+
+
+
+

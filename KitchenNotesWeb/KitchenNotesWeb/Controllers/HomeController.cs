@@ -51,8 +51,26 @@ namespace KitchenNotesWeb.Controllers
             return HubIdReference;
         }
 
+        /// <summary>
+        /// Retrieves the number of new notes since the user had last logged in
+        /// </summary>
+        /// <returns>Int of new notes</returns>
+        [Authorize]
+        [Route("numNewNotes")]
+        public int NumNewNotes()
+        {
+            int numNotes = 0;
 
-
-
+            User user = KitchenNotesUser.getUser(User.Identity.Name);
+            List<Notes> allNotes = NotesController.getHubNotes(user.Username);
+            List<Notes> newNotes = allNotes.Where(x => x.DateAdded > user.LastLogin).ToList();
+            if(newNotes != null)
+            {
+                numNotes = newNotes.Count();
+            }
+            
+            return numNotes;
+        }
+        
     }
 }

@@ -63,6 +63,8 @@
     <Build Include="UserHub.sql" />
     <Build Include="Hub.sql" />
     <Build Include="Notes.sql" />
+    <Build Include="Tasks.sql" />
+    <Build Include="HubEvents.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="KitchNotesDatabase.refactorlog" />

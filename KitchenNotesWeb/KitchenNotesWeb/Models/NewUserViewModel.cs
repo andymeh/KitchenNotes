@@ -11,7 +11,7 @@ namespace KitchenNotesWeb.Models
     {
         [Display(Name = "Enter your 8 digit Hub Reference*")]
         [Required(ErrorMessage = "Hub name is required")]
-        [StringLength(8, ErrorMessage = "Hub Name can be no larger than 8 characters")]
+        [StringLength(8, ErrorMessage = "Hub Name can be no longer than 8 characters")]
         public string HubIdStart { get; set; }
 
         [Display(Name = "Username*")]
@@ -31,12 +31,14 @@ namespace KitchenNotesWeb.Models
 
         [Display(Name = "Password*")]
         [Required(ErrorMessage = "Password is required")]
-        [StringLength(50, ErrorMessage = "Password can be no larger than 40 characters")]
+        [DataType(DataType.Password)]
+        [StringLength(50, ErrorMessage = "Password can be no longer than 40 characters")]
         public string Password { get; set; }
 
         [Display(Name = "Confirm Password*")]
         [Required(ErrorMessage = "Password Confirmation is required")]
-        [StringLength(50, ErrorMessage = "Password can be no larger than 40 characters")]
+        [DataType(DataType.Password)]
+        [StringLength(50, ErrorMessage = "Password can be no longer than 40 characters")]
         public string Password2 { get; set; }
 
         [Display(Name = "Date Of Birth*")]

@@ -7,5 +7,6 @@
     [Password] NCHAR(40) NOT NULL, 
     [DOB] DATE NOT NULL, 
     [Email] NCHAR(30) NOT NULL, 
-    [CurrentHub] UNIQUEIDENTIFIER NOT NULL
+    [CurrentHub] UNIQUEIDENTIFIER NOT NULL, 
+    [LastLogin] DATETIME NOT NULL
 )

@@ -31,11 +31,13 @@ namespace KitchenNotesWeb.Models
 
         [Display(Name = "Password*")]
         [Required(ErrorMessage = "Password is required")]
+        [DataType(DataType.Password)]
         [StringLength(50, ErrorMessage = "Password can be no larger than 40 characters")]
         public string Password { get; set; }
 
         [Display(Name = "Confirm Password*")]
         [Required(ErrorMessage = "Password Confirmation is required")]
+        [DataType(DataType.Password)]
         [StringLength(50, ErrorMessage = "Password can be no larger than 40 characters")]
         public string Password2 { get; set; }
 

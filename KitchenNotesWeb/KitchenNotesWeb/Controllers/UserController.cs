@@ -57,6 +57,7 @@ namespace KitchenNotesWeb.Controllers
         }
         public ActionResult Logout()
         {
+            KitchenNotesUser.updateLastLogin(User.Identity.Name);
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
@@ -77,13 +78,15 @@ namespace KitchenNotesWeb.Controllers
                         Email = userReg.UserEmail,
                         DOB = userReg.DOB,
                         Password = SHA1.Encode(userReg.Password),
-                        CurrentHub = HubId
+                        CurrentHub = HubId,
+                        LastLogin = DateTime.Now
                     };
 
                     if (!KitchenNotesUser.UserNameExists(userReg.UserName))
                     {
                         KitchenNotesUser.addNewUserToExistingHub(newUser, HubId);
                         FormsAuthentication.SetAuthCookie(newUser.Username, true);
+                        KitchenNotesUser.addUserAsAdmin(newUser.Username);
                         return RedirectToAction("Index", "Home");
                     }
                     else
@@ -118,12 +121,15 @@ namespace KitchenNotesWeb.Controllers
                             Email = nUser.UserEmail,
                             DOB = nUser.DOB,
                             Password = SHA1.Encode(nUser.Password),
-                            CurrentHub = HubId
+                            CurrentHub = HubId,
+                            LastLogin = DateTime.Now
                         };
 
                         if (!KitchenNotesUser.UserNameExists(nUser.UserName))
                         {
                             KitchenNotesUser.addNewUserToExistingHub(newUser, HubId);
+                            FormsAuthentication.SetAuthCookie(nUser.UserName, true);
+                            return RedirectToAction("Index", "Home");
                         }
                         else
                         {

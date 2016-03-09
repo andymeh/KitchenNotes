@@ -7,9 +7,9 @@ namespace KitchenNotesWeb.Models
 {
     public class NotesIndexModel
     {
-        public IEnumerable<KitchenNotesDAL.Notes> noteList { get; set; }
+        public IEnumerable<DetailedNoteModel> noteList { get; set; }
 
-        public NotesModel noteModel { get; set; }
+        public NewNotesModel noteModel { get; set; }
         
     }
 }

@@ -77,4 +77,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="DateHidden" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="c055db25-a799-4375-aaec-be8745332824" ChangeDateTime="02/18/2016 10:45:19">
+    <Property Name="ElementName" Value="[dbo].[Tasks].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Tasks]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TaskId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7cf1ae89-88f7-4368-b299-c90a772aed78" ChangeDateTime="02/26/2016 21:14:14">
+    <Property Name="ElementName" Value="[dbo].[HubEvents].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[HubEvents]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="HubEventId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a0e87d98-4da7-479a-b9d5-62bed8c12dc8" ChangeDateTime="02/26/2016 21:14:47">
+    <Property Name="ElementName" Value="[dbo].[HubEvents].[EventName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[HubEvents]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Name" />
+  </Operation>
 </Operations>

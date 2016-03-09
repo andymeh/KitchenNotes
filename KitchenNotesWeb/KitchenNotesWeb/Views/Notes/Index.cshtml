@@ -7,33 +7,27 @@
 @if (Request.IsAuthenticated)
 {
 <h2>Index</h2>
-<div class="col-lg-4">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> New Note</h3>
+<div class="row">
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-newspaper-o fa-fw"></i> New Note</h3>
 
-        </div>
-        <div class="panel-body">
-            @{Html.RenderPartial("NewNote", Model.noteModel);}
-        </div>
-    </div>
-</div>
-<div class="col-lg-4">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> @{Html.RenderAction("HubName", "Home", new { username = User.Identity.Name });} Notes</h3>
-
-        </div>
-        <div class="panel-body">
-            @{Html.RenderPartial("ViewHubNotes", Model.noteList);}
+            </div>
+            <div class="panel-body">
+                @{Html.RenderPartial("NewNote", Model.noteModel);}
+            </div>
         </div>
     </div>
+    
+    @{Html.RenderPartial("ViewHubNotes", Model.noteList);}
+            
 </div>
 
-                }
+    }
 
-                else
-                {
+    else
+    {
 
-                }
+    }
 
