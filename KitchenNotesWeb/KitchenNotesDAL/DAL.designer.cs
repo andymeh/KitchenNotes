@@ -39,9 +39,9 @@ namespace KitchenNotesDAL
     partial void InsertNotes(Notes instance);
     partial void UpdateNotes(Notes instance);
     partial void DeleteNotes(Notes instance);
-    partial void InsertTask(Task instance);
-    partial void UpdateTask(Task instance);
-    partial void DeleteTask(Task instance);
+    partial void InsertTasks(Tasks instance);
+    partial void UpdateTasks(Tasks instance);
+    partial void DeleteTasks(Tasks instance);
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
@@ -51,7 +51,7 @@ namespace KitchenNotesDAL
     #endregion
 		
 		public DALDataContext() : 
-				base(global::KitchenNotesDAL.Properties.Settings.Default.KitchNotesDatabaseConnectionString, mappingSource)
+				base(global::KitchenNotesDAL.Properties.Settings.Default.KitchNotesDatabaseConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -104,11 +104,11 @@ namespace KitchenNotesDAL
 			}
 		}
 		
-		public System.Data.Linq.Table<Task> Tasks
+		public System.Data.Linq.Table<Tasks> Tasks
 		{
 			get
 			{
-				return this.GetTable<Task>();
+				return this.GetTable<Tasks>();
 			}
 		}
 		
@@ -311,6 +311,8 @@ namespace KitchenNotesDAL
 		
 		private string _Importance;
 		
+		private System.DateTime _DateAdded;
+		
 		private EntityRef<UserHub> _UserHub;
 		
     #region Extensibility Method Definitions
@@ -331,6 +333,8 @@ namespace KitchenNotesDAL
     partial void OnEndDateChanged();
     partial void OnImportanceChanging(string value);
     partial void OnImportanceChanged();
+    partial void OnDateAddedChanging(System.DateTime value);
+    partial void OnDateAddedChanged();
     #endregion
 		
 		public HubEvent()
@@ -479,6 +483,26 @@ namespace KitchenNotesDAL
 					this._Importance = value;
 					this.SendPropertyChanged("Importance");
 					this.OnImportanceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateAdded", DbType="DateTime NOT NULL")]
+		public System.DateTime DateAdded
+		{
+			get
+			{
+				return this._DateAdded;
+			}
+			set
+			{
+				if ((this._DateAdded != value))
+				{
+					this.OnDateAddedChanging(value);
+					this.SendPropertyChanging();
+					this._DateAdded = value;
+					this.SendPropertyChanged("DateAdded");
+					this.OnDateAddedChanged();
 				}
 			}
 		}
@@ -762,7 +786,7 @@ namespace KitchenNotesDAL
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tasks")]
-	public partial class Task : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Tasks : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -778,6 +802,8 @@ namespace KitchenNotesDAL
 		private bool _Completed;
 		
 		private bool _Hidden;
+		
+		private System.DateTime _DatePosted;
 		
 		private EntityRef<UserHub> _UserHub;
 		
@@ -797,9 +823,11 @@ namespace KitchenNotesDAL
     partial void OnCompletedChanged();
     partial void OnHiddenChanging(bool value);
     partial void OnHiddenChanged();
+    partial void OnDatePostedChanging(System.DateTime value);
+    partial void OnDatePostedChanged();
     #endregion
 		
-		public Task()
+		public Tasks()
 		{
 			this._UserHub = default(EntityRef<UserHub>);
 			OnCreated();
@@ -845,7 +873,7 @@ namespace KitchenNotesDAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AssignedTo", DbType="NChar(10)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AssignedTo", DbType="NChar(50)")]
 		public string AssignedTo
 		{
 			get
@@ -925,6 +953,26 @@ namespace KitchenNotesDAL
 					this._Hidden = value;
 					this.SendPropertyChanged("Hidden");
 					this.OnHiddenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DatePosted", DbType="DateTime NOT NULL")]
+		public System.DateTime DatePosted
+		{
+			get
+			{
+				return this._DatePosted;
+			}
+			set
+			{
+				if ((this._DatePosted != value))
+				{
+					this.OnDatePostedChanging(value);
+					this.SendPropertyChanging();
+					this._DatePosted = value;
+					this.SendPropertyChanged("DatePosted");
+					this.OnDatePostedChanged();
 				}
 			}
 		}
@@ -1284,7 +1332,7 @@ namespace KitchenNotesDAL
 		
 		private EntitySet<Notes> _Notes;
 		
-		private EntitySet<Task> _Tasks;
+		private EntitySet<Tasks> _Tasks;
 		
 		private EntityRef<Hub> _Hub;
 		
@@ -1308,7 +1356,7 @@ namespace KitchenNotesDAL
 		{
 			this._HubEvents = new EntitySet<HubEvent>(new Action<HubEvent>(this.attach_HubEvents), new Action<HubEvent>(this.detach_HubEvents));
 			this._Notes = new EntitySet<Notes>(new Action<Notes>(this.attach_Notes), new Action<Notes>(this.detach_Notes));
-			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
+			this._Tasks = new EntitySet<Tasks>(new Action<Tasks>(this.attach_Tasks), new Action<Tasks>(this.detach_Tasks));
 			this._Hub = default(EntityRef<Hub>);
 			this._User = default(EntityRef<User>);
 			OnCreated();
@@ -1429,7 +1477,7 @@ namespace KitchenNotesDAL
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserHub_Task", Storage="_Tasks", ThisKey="UserHubId", OtherKey="UserHubId")]
-		public EntitySet<Task> Tasks
+		public EntitySet<Tasks> Tasks
 		{
 			get
 			{
@@ -1553,13 +1601,13 @@ namespace KitchenNotesDAL
 			entity.UserHub = null;
 		}
 		
-		private void attach_Tasks(Task entity)
+		private void attach_Tasks(Tasks entity)
 		{
 			this.SendPropertyChanging();
 			entity.UserHub = this;
 		}
 		
-		private void detach_Tasks(Task entity)
+		private void detach_Tasks(Tasks entity)
 		{
 			this.SendPropertyChanging();
 			entity.UserHub = null;

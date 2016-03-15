@@ -15,21 +15,59 @@ namespace KitchenNotesWeb.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View();
+            KitchenNotesUser.updateLastLogin(User.Identity.Name);
+            var model = new Models.TasksIndexModel();
+            model.taskModel = new Models.NewTaskModel();
+            model.taskModel.userList = GetUsersInHub();
+            return View(model);
         }
 
-        public ActionResult NewTask()
+        private SelectList GetUsersInHub()
         {
-            var model = new NewTaskModel();
             User user = KitchenNotesUser.getUser(User.Identity.Name);
             List<UserHub> allUserHub = KitchenNotesUserHub.getAllUserHubsInHub(user.CurrentHub);
             List<User> allUsersInHub = new List<User>();
-            foreach(UserHub uh in allUserHub)
+            foreach (UserHub uh in allUserHub)
             {
                 allUsersInHub.Add(KitchenNotesUser.getUser(uh.UserId));
             }
-            model.hubUsers = allUsersInHub;
+            return new SelectList(allUsersInHub, "Username", "Forename");
+        }
+
+        [Authorize]
+        public ActionResult NewTask()
+        {
+            var model = new NewTaskModel();
+
+            model.userList = GetUsersInHub();
             return View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult NewTask(NewTaskModel newTask)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = KitchenNotesUser.getUser(User.Identity.Name);
+                UserHub uHub = KitchenNotesUserHub.getCurrentUserHub(user.CurrentHub, user.UserId);
+                KitchenNotesTasks.addTask(new Tasks
+                {
+                    TaskId = Guid.NewGuid(),
+                    TaskDetail = newTask.taskDetail,
+                    AssignedTo = KitchenNotesUser.getUser(newTask.assignedTo).Username,
+                    UserHubId = uHub.UserHubId,
+                    DatePosted = DateTime.UtcNow
+                });
+                return RedirectToAction("Index", "Tasks");
+            }
+            return View(newTask);
+        }
+
+        [Authorize]
+        public ActionResult ViewTasks()
+        {
+            return View();
         }
     }
 }

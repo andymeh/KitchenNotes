@@ -15,7 +15,7 @@ namespace KitchenNotesWeb.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            KitchenNotesUser.updateLastLogin(User.Identity.Name);
+            //KitchenNotesUser.updateLastLogin(User.Identity.Name);
             var model = new Models.NotesIndexModel();
             model.noteModel = new Models.NewNotesModel();
             model.noteList = getDetailedHubNotes(User.Identity.Name);
@@ -108,9 +108,9 @@ namespace KitchenNotesWeb.Controllers
                 {
                     User user = KitchenNotesUser.getUser(User.Identity.Name);
 
-                    List<UserHub> lstUserHubs = KitchenNotesHub.lstUserHubs(user.UserId);
+                    UserHub uHub = KitchenNotesUserHub.getCurrentUserHub(user.CurrentHub, user.UserId);
 
-                    KitchenNotesNotes.addNewNote(lstUserHubs.First().UserHubId, note.noteContent);
+                    KitchenNotesNotes.addNewNote(uHub.UserHubId, note.noteContent);
                     return RedirectToAction("Index", "Notes");
                 }
                 else
@@ -143,6 +143,19 @@ namespace KitchenNotesWeb.Controllers
             bool isAdmin = KitchenNotesUser.isUserAdmin(uHub.UserHubId);
 
             return isAdmin;
+        }
+
+        [Authorize]
+        [Route("EditNote")]
+        [HttpGet]
+        public ActionResult EditNote(NewNotesModel editedNote)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+
+            return Redirect(Request.UrlReferrer.ToString());
         }
         
 

@@ -35,16 +35,18 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="input-group input-daterange">
-                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", placeholder = "", id = "datetimepicker" } })
-                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
-                    <span class="input-group-addon">to</span>
-                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", placeholder = "", id = "datetimepicker2" } })
-                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
-                </div>
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", placeholder = "", id = "datetimepicker6" } })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", placeholder = "", id = "datetimepicker7" } })
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -57,21 +59,41 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 @section scripts{
-    <script type="text/javascript">
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker6').datetimepicker({
+            format: 'DD/MM/YYYY hh:mm:ss',
+            locale: 'en-gb'
+        });
+        $('#datetimepicker7').datetimepicker({
+            useCurrent: false, //Important! See issue #1075
+            format: 'DD/MM/YYYY hh:mm:ss',
+            locale: 'en-gb'
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>
+    @*<script type="text/javascript">
             $(function () {
                 $('#datetimepicker').datetimepicker({
-                    format: 'DD-MM-YY hh:mm:ss',
+                    format: 'DD/MM/YY hh:mm:ss',
                     locale: 'en-gb'
                 });
             });
-</script>
-<script type="text/javascript">
+    </script>
+    <script type="text/javascript">
             $(function () {
                 $('#datetimepicker2').datetimepicker({
-                    format: 'DD-MM-YY hh:mm:ss',
+                    format: 'DD/MM/YY hh:mm:ss',
                     locale: 'en-gb'
                 });
             });
-</script>
+    </script>*@
    
     }

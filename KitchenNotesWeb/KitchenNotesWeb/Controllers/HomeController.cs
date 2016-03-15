@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using KitchenNotesBLL;
 using KitchenNotesDAL;
-
+using KitchenNotesWeb.Models;
 
 namespace KitchenNotesWeb.Controllers
 {
@@ -15,8 +15,35 @@ namespace KitchenNotesWeb.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
+            User user = KitchenNotesUser.getUser(User.Identity.Name);
+            var model = new HomeUserModel();
+            model.userlogin = new UserLogin();
+            model.currentHub = user.CurrentHub;
 
-            return View();
+            List<UserHub> AllUsersHubs = KitchenNotesHub.lstUserHubs(user.UserId);
+            List<Hub> AllHubDetails = KitchenNotesHub.lstHubDetails(AllUsersHubs);
+
+            model.userHubs = new List<UserHubDetailModel>();
+            foreach(var hd in AllHubDetails)
+            {
+                model.userHubs.Add(new UserHubDetailModel
+                {
+                    HubId = hd.HubId,
+                    hubName = hd.HubName,
+                    usersInHub = ConvertUserToUserDetails(KitchenNotesHub.getUsersInHub(hd.HubId))
+                });
+            }
+            return View(model);
+        }
+
+        [Route("ChangeCurrentHub")]
+        public ActionResult ChangeCurrentHub(string hubGuid)
+        {
+            User user = KitchenNotesUser.getUser(User.Identity.Name);
+
+            KitchenNotesUser.ChangeCurrentHub(user.UserId, new Guid(hubGuid));
+
+            return RedirectToAction("Index", "Home");
         }
 
         [Route("HubName")]
@@ -51,6 +78,11 @@ namespace KitchenNotesWeb.Controllers
             return HubIdReference;
         }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+
         /// <summary>
         /// Retrieves the number of new notes since the user had last logged in
         /// </summary>
@@ -71,6 +103,57 @@ namespace KitchenNotesWeb.Controllers
             
             return numNotes;
         }
-        
+        [Authorize]
+        [Route("numNewTasks")]
+        public int NumNewTasks()
+        {
+            int numTasks = 0;
+
+            User user = KitchenNotesUser.getUser(User.Identity.Name);
+            UserHub uHub = KitchenNotesUserHub.getCurrentUserHub(user.CurrentHub, user.UserId);
+            List<Tasks> allTasks = KitchenNotesTasks.getAllUserHubTasks(uHub.UserHubId);
+            List< Tasks > newTasks = allTasks.Where(x => x.DatePosted > user.LastLogin).ToList();
+            if (newTasks != null)
+            {
+                numTasks = newTasks.Count();
+            }
+
+            return numTasks;
+        }
+        [Authorize]
+        [Route("numNewEvents")]
+        public int NumNewEvents()
+        {
+            int numEvents = 0;
+
+            User user = KitchenNotesUser.getUser(User.Identity.Name);
+            List<HubEvent> allEvents = KitchenNotesEvents.getAllEvents(user.CurrentHub);
+            List<HubEvent> newEvents = allEvents.Where(x => x.DateAdded > user.LastLogin).ToList();
+            if (newEvents != null)
+            {
+                numEvents = newEvents.Count();
+            }
+
+            return numEvents;
+        }
+
+        public List<UserDetails> ConvertUserToUserDetails(List<User> userList)
+        {
+            List<UserDetails> uDetails = new List<UserDetails>();
+            foreach (var u in userList)
+            {
+                uDetails.Add(new UserDetails
+                {
+                    username = u.Username,
+                    Forename = u.Forename,
+                    Surname = u.Surname,
+                    DOB = u.DOB,
+                    UserEmail = u.Email,
+                    Password = u.Password
+                });
+            }
+            return uDetails;
+        }
+
     }
 }

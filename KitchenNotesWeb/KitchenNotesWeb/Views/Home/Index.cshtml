@@ -1,4 +1,4 @@
-﻿
+﻿@model KitchenNotesWeb.Models.HomeUserModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,81 +7,185 @@
 @if (Request.IsAuthenticated)
 {
     <div class="row">
-        <div class="col-lg-12">
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+            @foreach (var hub in Model.userHubs)
+            {
+                if (Model.currentHub == hub.HubId)
+                {
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("ChangeCurrentHub", "Home", new { hubGuid = hub.HubId })'">@hub.hubName</button>
+                    </div>
+                }
+                else
+                {
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("ChangeCurrentHub", "Home", new { hubGuid = hub.HubId })'">@hub.hubName</button>
+                    </div>
+                }
 
-
-            <h1>Welcome @Html.Encode(User.Identity.Name)</h1>
-            <h3 class="media-body">HubID : @{Html.RenderAction("HubIdRefs", "Home", new { username = User.Identity.Name });} </h3>
-            <h3>Share this ID with people you want to invite to this Hub</h3>
-
-
+            }
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-comments fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">@{Html.RenderAction("numNewNotes", "Home");}</div>
-                            <div>New Notes!</div>
-                        </div>
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row well well-lg">
+                    <div class="col-md-6 col-md-offset-3 centerfy">
+                        <h1>Welcome @Html.Encode(User.Identity.Name)</h1>
+                        <h2 class="media-body">HubID : @{Html.RenderAction("HubIdRefs", "Home", new { username = User.Identity.Name });} </h2>
+                        <h3>Share this ID with people you want to invite to this Hub</h3>
                     </div>
                 </div>
-                <a href="@Url.Action("Index", "Notes")">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
             </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-green">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-tasks fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">12</div>
-                            <div>New Tasks!</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
             </div>
-        </div>
     </div>
-}
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-comments fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">@{Html.RenderAction("numNewNotes", "Home");}</div>
+                                    <div>New Notes!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="@Url.Action("Index", "Notes")">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-tasks fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">@{Html.RenderAction("numNewTasks", "Home");}</div>
+                                    <div>New Tasks!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="@Url.Action("Index", "Tasks")">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-calendar fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">@{Html.RenderAction("numNewEvents", "Home");}</div>
+                                    <div>New Events</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-users fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">@{Html.RenderAction("numNewEvents", "Home");}</div>
+                                    <div>New Users</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            }
+
+            else
+            {
+
+            <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="loginmodal-container">
+                        <h1>Login to Your Account</h1><br>
+                        @using (Html.BeginForm("ModalLogin", "User", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.userlogin.username, new { htmlAttributes = new { @type = "text", name = "user", placeholder = "Username" } })
+                                @Html.ValidationMessageFor(model => model.userlogin.username, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.userlogin.password, new { htmlAttributes = new { @type = "password", @name = "pass", @placeholder = "Password" } })
+                                @Html.ValidationMessageFor(model => model.userlogin.password, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                Remember Me
+                                <div class="checkbox" , style="float:right">
+                                    @Html.EditorFor(model => model.userlogin.rememberMe, new { htmlAttributes = new { @type = "checkbox", @name = "check" } })
+                                    @Html.ValidationMessageFor(model => model.userlogin.rememberMe, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" name="login" class="login loginmodal-submit" value="Login">
+                            </div>
+                        }
+
+                        <div class="login-help">
+                            <a href='@Url.Action("Register", "User")'>New Hub</a> - <a href='@Url.Action("NewUser", "User")'>Join Hub</a> - <a href="#">Forgot Password</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @section Scripts{
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#login-modal').modal('show');
+                    });
+
+                </script>
+            }
+            }
 
 
-else
-{
-    <div class="row">
-        <div class="col-lg-12">
-            <h1> Please Sign in Or Register</h1>
-            <ul class="list-group">
-                <li><button type="button" class="btn btn-success btn-lg" onclick="location.href='@Url.Action("Register", "User")'">Register new Hub</button></li>
-                <li><button type="button" class="btn btn-info btn-lg" onclick="location.href='@Url.Action("NewUser", "User")'">Join a Hub</button></li>
-                <li><button type="button" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("Login", "User")'">Sign In</button></li>
-            </ul>
-        </div>
-     </div>
-}
 
 
 
-
-
-<!-- /.row -->
+            <!-- /.row -->

@@ -51,4 +51,35 @@ namespace KitchenNotesWeb.Models
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string UserEmail { get; set; }
     }
+
+    public class UserDetails
+    {
+        public string username { get; set; }
+        public string Forename { get; set; }
+        public string Surname { get; set; }
+        public string Password { get; set; }
+        public DateTime DOB { get; set; }
+        public string UserEmail { get; set; }
+
+    }
+
+    public class UserLogin
+    {
+        [Display(Name = "Username*")]
+        [Required(ErrorMessage = "Please enter a Username")]
+        public string username { get; set; }
+        [Display(Name = "Password*")]
+        [Required(ErrorMessage = "Please enter a Password")]
+        [DataType(DataType.Password)]
+        public string password { get; set; }
+        [Display(Name = "Rememeber me")]
+        public bool rememberMe { get; set; }
+    }
+
+    public class HomeUserModel
+    {
+        public Guid currentHub { get; set; }
+        public UserLogin userlogin { get; set; }
+        public List<UserHubDetailModel> userHubs { get; set; }
+    }
 }

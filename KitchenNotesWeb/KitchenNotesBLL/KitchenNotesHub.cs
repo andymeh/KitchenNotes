@@ -10,7 +10,6 @@ namespace KitchenNotesBLL
 {
     public class KitchenNotesHub
     {
-
         public static void addHub(string newHubName)
         {
             Hub newHub = Entities.createHub(newHubName);
@@ -31,6 +30,19 @@ namespace KitchenNotesBLL
             }
         }
 
+        public static List<Hub> lstHubDetails(List<UserHub> userHubs)
+        {
+            using(var db = new DALDataContext())
+            {
+                List<Hub> lstHubDetails = new List<Hub>();
+                foreach(var uh in userHubs)
+                {
+                    lstHubDetails.Add(db.Hubs.First(x => x.HubId == uh.HubId));
+                }
+                return lstHubDetails;
+            }
+        }
+
         public static Guid addHubReturnId(string newHubName)
         {
             Hub newHub = Entities.createHub(newHubName);
@@ -40,6 +52,20 @@ namespace KitchenNotesBLL
                 dc.SubmitChanges();
                 Guid id = newHub.HubId;
                 return id;
+            }
+        }
+
+        public static List<User> getUsersInHub(Guid HubId)
+        {
+            using(var db = new DALDataContext())
+            {
+                List<UserHub> allUserHubs = db.UserHubs.Where(x => x.HubId == HubId).ToList();
+                List<User> allUsersInHub = new List<User>();
+                foreach(var u in allUserHubs)
+                {
+                    allUsersInHub.Add(db.Users.First(x => x.UserId == u.UserId));
+                }
+                return allUsersInHub;
             }
         }
 
@@ -95,6 +121,16 @@ namespace KitchenNotesBLL
                 return user;
             }
         }
+
+        public static void ChangeCurrentHub(Guid UserId, Guid HubId)
+        {
+            using (var db = new DALDataContext())
+            {
+                User user = db.Users.First(x => x.UserId == UserId);
+                user.CurrentHub = HubId;
+                db.SubmitChanges();
+            }
+        }
         public static User getUser(Guid userId)
         {
             using (var db = new DALDataContext())
@@ -110,7 +146,7 @@ namespace KitchenNotesBLL
             using (var db = new DALDataContext())
             {
                 User user = db.Users.First(x => x.Username == username);
-                user.LastLogin = DateTime.Now;
+                user.LastLogin = DateTime.UtcNow;
                 db.SubmitChanges();
             }
 
@@ -374,10 +410,64 @@ namespace KitchenNotesBLL
                 db.SubmitChanges();
             }
         }
+
+        public static HubEvent getEvent(Guid EventId)
+        {
+            using (var db = new DALDataContext())
+            {
+                HubEvent hEvent = new HubEvent();
+                hEvent = db.HubEvents.First(x => x.HubEventId == EventId);
+                return hEvent;
+            }
+        }
     }
 
     public class KitchenNotesTasks
     {
+        public static void addTask(Tasks newTask)
+        {
+            using(var dc = new DALDataContext())
+            {
+                dc.Tasks.InsertOnSubmit(newTask);
+                dc.SubmitChanges();
+            }
+        }
+
+        public static List<Tasks> getAllUserHubTasks(Guid _UserHubId)
+        {
+            using (var db = new DALDataContext())
+            {
+                List<Tasks> hubTasks = new List<Tasks>();
+                List<UserHub> lstUserHub = db.UserHubs.Where(i => i.UserHubId == _UserHubId).ToList();
+                if (lstUserHub != null && lstUserHub.Count != 0)
+                {
+                    List<Guid> lstUserHubIds = new List<Guid>();
+                    foreach (UserHub uh in lstUserHub)
+                    {
+                        lstUserHubIds.Add(uh.UserHubId);
+                    }
+                    foreach (Guid x in lstUserHubIds)
+                    {
+                        hubTasks.AddRange(db.Tasks.Where(i => i.UserHubId == x));
+                    }
+
+                }
+                return hubTasks;
+            }
+
+        }
+
+        public static List<Tasks> getAllUserTasks(string username)
+        {
+            using (var db = new DALDataContext())
+            {
+                List<Tasks> alluserTasks = new List<Tasks>();
+                alluserTasks.AddRange(db.Tasks.Where(x => x.AssignedTo.Equals(username)));
+                return alluserTasks;
+            }
+
+        }
+
 
     }
     

@@ -51,4 +51,11 @@ namespace KitchenNotesWeb.Models
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string UserEmail { get; set; }
     }
+
+    public class UserHubDetailModel
+    {
+        public Guid HubId { get; set; }
+        public string hubName { get; set; }
+        public List<UserDetails> usersInHub { get; set; }
+    }
 }

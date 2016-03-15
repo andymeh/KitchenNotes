@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="KitchNotesDatabase" Class="DALDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=ANDY-PC;Initial Catalog=KitchNotesDatabase;Integrated Security=True" SettingsObjectName="KitchenNotesDAL.Properties.Settings" SettingsPropertyName="KitchNotesDatabaseConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=sqlserverkn.westeurope.cloudapp.azure.com;Initial Catalog=KitchNotesDatabase;User ID=AdminAndy" SettingsObjectName="KitchenNotesDAL.Properties.Settings" SettingsPropertyName="KitchNotesDatabaseConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Hub" Member="Hubs">
     <Type Name="Hub">
       <Column Name="HubId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -18,6 +18,7 @@
       <Column Name="StartDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="EndDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Importance" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Column Name="DateAdded" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="UserHub_HubEvent" Member="UserHub" ThisKey="UserHubId" OtherKey="UserHubId" Type="UserHub" IsForeignKey="true" />
     </Type>
   </Table>
@@ -33,13 +34,14 @@
     </Type>
   </Table>
   <Table Name="dbo.Tasks" Member="Tasks">
-    <Type Name="Task">
+    <Type Name="Tasks">
       <Column Name="TaskId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="TaskDetail" Type="System.String" DbType="NChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="AssignedTo" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="AssignedTo" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
       <Column Name="UserHubId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="Completed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="Hidden" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DatePosted" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="UserHub_Task" Member="UserHub" ThisKey="UserHubId" OtherKey="UserHubId" Type="UserHub" IsForeignKey="true" />
     </Type>
   </Table>
@@ -65,7 +67,7 @@
       <Column Name="HubAdmin" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="UserHub_HubEvent" Member="HubEvents" ThisKey="UserHubId" OtherKey="UserHubId" Type="HubEvent" />
       <Association Name="UserHub_Note" Member="Notes" ThisKey="UserHubId" OtherKey="UserHubId" Type="Notes" />
-      <Association Name="UserHub_Task" Member="Tasks" ThisKey="UserHubId" OtherKey="UserHubId" Type="Task" />
+      <Association Name="UserHub_Task" Member="Tasks" ThisKey="UserHubId" OtherKey="UserHubId" Type="Tasks" />
       <Association Name="Hub_UserHub" Member="Hub" ThisKey="HubId" OtherKey="HubId" Type="Hub" IsForeignKey="true" />
       <Association Name="User_UserHub" Member="User" ThisKey="UserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
     </Type>

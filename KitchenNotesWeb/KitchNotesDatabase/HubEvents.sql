@@ -7,5 +7,6 @@
     [StartDate] DATETIME NOT NULL, 
     [EndDate] DATETIME NOT NULL, 
     [Importance] NCHAR(20) NULL, 
+    [DateAdded] DATETIME NOT NULL, 
     CONSTRAINT [FK_HubEvents_UserHub] FOREIGN KEY ([UserHubId]) REFERENCES [UserHub]([UserHubId])
 )

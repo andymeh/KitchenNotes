@@ -36,7 +36,14 @@ namespace KitchenNotesWeb.Controllers
             {
                 User user = KitchenNotesUser.getUser(User.Identity.Name);
                 UserHub uHub = KitchenNotesUserHub.getCurrentUserHub(user.CurrentHub, user.UserId);
-                HubEvent Event = new HubEvent { HubEventId = Guid.NewGuid(), UserHubId = uHub.UserHubId, Name = newEvent.title, Description = newEvent.Description, StartDate = newEvent.StartDate, EndDate = newEvent.EndDate };
+                HubEvent Event = new HubEvent {
+                    HubEventId = Guid.NewGuid(),
+                    UserHubId = uHub.UserHubId,
+                    Name = newEvent.title,
+                    Description = newEvent.Description,
+                    StartDate = newEvent.StartDate.ToUniversalTime(),
+                    EndDate = newEvent.EndDate.ToUniversalTime(),
+                    DateAdded = DateTime.UtcNow };
                 KitchenNotesEvents.addEvent(Event);
                 return RedirectToAction("Index", "Events");
             }
@@ -74,8 +81,8 @@ namespace KitchenNotesWeb.Controllers
             if (from != null && to != null)
             {
                 DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-                DateTime fromDate = start.AddMilliseconds((double)from).ToLocalTime();
-                DateTime toDate = start.AddMilliseconds((double)to).ToLocalTime();
+                DateTime fromDate = start.AddMilliseconds((double)from).ToUniversalTime();
+                DateTime toDate = start.AddMilliseconds((double)to).ToUniversalTime();
 
 
                 lstEvents.AddRange(KitchenNotesEvents.getEventsWithinDate(user.CurrentHub, fromDate, toDate));
@@ -90,8 +97,9 @@ namespace KitchenNotesWeb.Controllers
             {
                 lstCalendarEvents.Add(new CalendarEventModel
                 {
-                    id = he.HubEventId.ToString().Substring(0, 8),
+                    id = he.HubEventId.ToString(),
                     title = he.StartDate.ToString("HH.mm") + " - " + he.EndDate.ToString("HH.mm") + " : " + he.Name + he.Description,
+                    url = Url.Content("~/Events/EventDetail?id=") + he.HubEventId.ToString(),
                     Class = "event-important",
                     start = ConvertToTimestamp(he.StartDate),
                     end = ConvertToTimestamp(he.EndDate)
@@ -101,11 +109,43 @@ namespace KitchenNotesWeb.Controllers
             return Content(@"{""success"": 1, ""result"": "+json+"}", "");
         }
 
+        [Authorize]
+        [HttpGet]
+        public ActionResult EventDetail(string id)
+        {
+            if(id != string.Empty)
+            {
+                Guid eventId;
+                try
+                {
+                    eventId = new Guid(id);
+                }
+                catch
+                {
+                    eventId = Guid.Empty;
+                }
+                if(eventId != Guid.Empty)
+                {
+                    HubEvent hEvent = KitchenNotesEvents.getEvent(eventId);
+                    EventDetailModel model = new EventDetailModel(){
+                        id = hEvent.HubEventId,
+                        title = hEvent.Name,
+                        description = hEvent.Description,
+                        start = hEvent.StartDate,
+                        end = hEvent.EndDate
+                    };
+                    return View(model);
+                }
+            }
+            return RedirectToAction("Index", "Events");
+        }
+
         private long ConvertToTimestamp(DateTime value)
         {
             //create Timespan by subtracting the value provided from
+
             //the Unix Epoch
-            TimeSpan span = (value - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime());
+            TimeSpan span = (value - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToUniversalTime());
 
             //return the total seconds (which is a UNIX timestamp)
             var milliSeconds = (long)(span.TotalSeconds * 1000);

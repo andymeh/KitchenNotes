@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using KitchenNotesBLL;
 using Helpers;
+using KitchenNotesWeb.Models;
 
 namespace KitchenNotesWeb.Controllers
 {
@@ -37,15 +38,63 @@ namespace KitchenNotesWeb.Controllers
         {
             return View();
         }
+        [Authorize]
+        public ActionResult AccountInfo(string username)
+        {
+            User user = KitchenNotesUser.getUser(username);
+            var model = new UserDetails()
+            {
+                username = username,
+                Forename = user.Forename,
+                Surname = user.Surname,
+                DOB = user.DOB,
+                UserEmail = user.Email
+            };
+            return View(model);
+        }
+
+        [Authorize]
+        public ActionResult ManageAccount(string username)
+        {
+            
+            User user = KitchenNotesUser.getUser(username);
+            var model = new UserDetails()
+            {
+                username = username,
+                Forename = user.Forename,
+                Surname = user.Surname,
+                DOB = user.DOB,
+                UserEmail = user.Email
+            };
+            return View(model);
+        }
 
         [HttpPost]
-        public ActionResult Login(User user)
+        public ActionResult Login(UserLogin user)
         {
             if (ModelState.IsValid)
             {
-                if (KitchenNotesUser.isUserValid(user.Username, user.Password))
+                if (KitchenNotesUser.isUserValid(user.username, user.password))
                 {
-                    FormsAuthentication.SetAuthCookie(user.Username, true);
+                    FormsAuthentication.SetAuthCookie(user.username, user.rememberMe);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Login data is incorrect!");
+                }
+            }
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult ModalLogin(HomeUserModel user)
+        {
+            if (ModelState.IsValid)
+            {
+                if (KitchenNotesUser.isUserValid(user.userlogin.username, user.userlogin.password))
+                {
+                    FormsAuthentication.SetAuthCookie(user.userlogin.username, user.userlogin.rememberMe);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -122,7 +171,7 @@ namespace KitchenNotesWeb.Controllers
                             DOB = nUser.DOB,
                             Password = SHA1.Encode(nUser.Password),
                             CurrentHub = HubId,
-                            LastLogin = DateTime.Now
+                            LastLogin = DateTime.UtcNow
                         };
 
                         if (!KitchenNotesUser.UserNameExists(nUser.UserName))

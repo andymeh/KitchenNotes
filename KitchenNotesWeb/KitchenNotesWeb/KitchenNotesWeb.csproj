@@ -215,16 +215,11 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CalendarEventModel.cs" />
-    <Compile Include="Models\DetailedNoteModel.cs" />
-    <Compile Include="Models\DetailedTaskModel.cs" />
+    <Compile Include="Models\EventViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\NewEventModel.cs" />
-    <Compile Include="Models\NewTaskModel.cs" />
-    <Compile Include="Models\NewUserViewModel.cs" />
-    <Compile Include="Models\NotesIndexModel.cs" />
-    <Compile Include="Models\NewNotesModel.cs" />
-    <Compile Include="Models\TasksIndexModel.cs" />
+    <Compile Include="Models\UserViewModels.cs" />
+    <Compile Include="Models\NotesViewModel.cs" />
+    <Compile Include="Models\TaskViewModel.cs" />
     <Compile Include="Models\UserHubViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -603,7 +598,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\NewUser.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -615,6 +609,10 @@
     <Content Include="Views\Tasks\NewTask.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
     <Content Include="Views\Events\NewEvent.cshtml" />
+    <Content Include="Views\Events\EventDetail.cshtml" />
+    <Content Include="Views\User\ManageAccount.cshtml" />
+    <Content Include="Views\User\AccountInfo.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

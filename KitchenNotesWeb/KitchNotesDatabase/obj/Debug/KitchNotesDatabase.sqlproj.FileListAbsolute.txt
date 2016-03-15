@@ -1,5 +1,9 @@
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchNotesDatabase\bin\Debug\KitchNotesDatabase.dacpac
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchNotesDatabase\bin\Debug\KitchNotesDatabase.dll
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchNotesDatabase\bin\Debug\KitchNotesDatabase.pdb
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchNotesDatabase\obj\Debug\Model.xml
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchNotesDatabase\obj\Debug\refactor.xml
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchNotesDatabase\obj\Debug\postdeploy.sql
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchNotesDatabase\obj\Debug\predeploy.sql
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchNotesDatabase\obj\Debug\KitchNotesDatabase.dll
 C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchNotesDatabase\obj\Debug\KitchNotesDatabase.pdb
