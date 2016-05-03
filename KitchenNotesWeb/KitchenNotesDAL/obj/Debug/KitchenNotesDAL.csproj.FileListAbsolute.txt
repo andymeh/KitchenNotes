@@ -1,0 +1,6 @@
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesDAL\bin\Debug\KitchenNotesDAL.dll.config
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesDAL\bin\Debug\KitchenNotesDAL.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesDAL\bin\Debug\KitchenNotesDAL.pdb
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesDAL\obj\Debug\KitchenNotesDAL.csprojResolveAssemblyReference.cache
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesDAL\obj\Debug\KitchenNotesDAL.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesDAL\obj\Debug\KitchenNotesDAL.pdb

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>ANDY-PC</Machine>
+    <WindowsUser>Andy</WindowsUser>
+    <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+    <TargetOsVersion>6.3</TargetOsVersion>
+    <TargetOsDescription>Windows 8.1</TargetOsDescription>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <PackageIdentityName>b4c7a734-5209-4c5e-838c-9a4795cb544b</PackageIdentityName>
+    <IntermediateOutputPath>C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesClient\KitchenNotesClient.Windows\obj\Debug\</IntermediateOutputPath>
+    <RegisteredManifestChecksum>E4BB42AF724F8E498CE9CC083051EF2DD16A20E1C62B1FCD68261171C38F5056</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>b4c7a734-5209-4c5e-838c-9a4795cb544b_1.0.0.0_neutral__nsf9e2fmhb1sj</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>b4c7a734-5209-4c5e-838c-9a4795cb544b_nsf9e2fmhb1sj!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>b4c7a734-5209-4c5e-838c-9a4795cb544b</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=Andy</RegisteredPackagePublisher>
+    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+    <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesClient\KitchenNotesClient.Windows\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2016-04-18T16:12:16.705</Modified>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesClient\KitchenNotesClient.Windows\bin\Debug\KitchenNotesClient.Windows.exe">
+      <PackagePath>KitchenNotesClient.Windows.exe</PackagePath>
+      <Modified>2016-04-22T14:13:35.196</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesClient\KitchenNotesClient.Windows\Assets\Logo.scale-100.png">
+      <PackagePath>Assets\Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2014-11-07T18:15:46.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesClient\KitchenNotesClient.Windows\Assets\SmallLogo.scale-100.png">
+      <PackagePath>Assets\SmallLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2014-11-07T18:15:46.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesClient\KitchenNotesClient.Windows\Assets\SplashScreen.scale-100.png">
+      <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2014-11-07T18:15:46.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesClient\KitchenNotesClient.Windows\Assets\StoreLogo.scale-100.png">
+      <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2014-11-07T18:15:46.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesClient\KitchenNotesClient.Windows\bin\Debug\KitchenNotesClient.Windows.xr.xml">
+      <PackagePath>KitchenNotesClient.Windows.xr.xml</PackagePath>
+      <Modified>2016-04-22T14:13:34.739</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesClient\KitchenNotesClient.Windows\bin\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+      <Modified>2016-03-14T15:03:06.771</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesClient\KitchenNotesClient.Windows\bin\Debug\MainPage.xbf">
+      <PackagePath>MainPage.xbf</PackagePath>
+      <Modified>2016-04-22T14:13:34.787</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesClient\KitchenNotesClient.Windows\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <Modified>2016-04-18T16:12:16.472</Modified>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

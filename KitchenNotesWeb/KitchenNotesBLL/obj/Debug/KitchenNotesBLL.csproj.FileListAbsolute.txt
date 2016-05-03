@@ -1,0 +1,9 @@
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesBLL\bin\Debug\KitchenNotesBLL.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesBLL\bin\Debug\KitchenNotesBLL.pdb
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesBLL\bin\Debug\Helpers.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesBLL\bin\Debug\KitchenNotesDAL.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesBLL\bin\Debug\Helpers.pdb
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesBLL\bin\Debug\KitchenNotesDAL.pdb
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesBLL\obj\Debug\KitchenNotesBLL.csprojResolveAssemblyReference.cache
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesBLL\obj\Debug\KitchenNotesBLL.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesBLL\obj\Debug\KitchenNotesBLL.pdb

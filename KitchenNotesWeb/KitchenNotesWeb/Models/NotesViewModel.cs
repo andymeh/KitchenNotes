@@ -26,12 +26,22 @@ namespace KitchenNotesWeb.Models
         public string noteContent { get; set; }
 
     }
+    public class EditNotesModel
+    {
+        public Guid noteId { get; set; }
+
+        [Display(Name = "Note")]
+        [Required(ErrorMessage = "Text is required..")]
+        public string noteContent { get; set; }
+
+    }
 
     public class NotesIndexModel
     {
         public IEnumerable<DetailedNoteModel> noteList { get; set; }
 
         public NewNotesModel noteModel { get; set; }
+        public EditNotesModel editModel { get; set;}
 
     }
 }

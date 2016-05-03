@@ -11,7 +11,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-10" style="padding-left:50pt">
+    <div class="col-lg-10">
         <div class="scheduler_container">
             <div class="page-header">
 
@@ -59,8 +59,8 @@
     <script type="text/javascript">
         var calendar = $("#calendar").calendar(
             {
-                events_source: '@Url.Content("~/Events/GetEventsWithinDate/")',
-                tmpl_path: '@Url.Content("~/Content/tmpls/")'
+                tmpl_path: '@Url.Content("~/Content/tmpls/")',
+                events_source: '@Url.Content("~/Events/GetEventsWithinDate/")'
         });
 
     </script>

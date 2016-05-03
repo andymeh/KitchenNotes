@@ -1,0 +1,12 @@
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\TestConsoleApp\bin\Debug\TestConsoleApp.exe.config
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\TestConsoleApp\bin\Debug\TestConsoleApp.exe
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\TestConsoleApp\bin\Debug\TestConsoleApp.pdb
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\TestConsoleApp\bin\Debug\Helpers.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\TestConsoleApp\bin\Debug\KitchenNotesBLL.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\TestConsoleApp\bin\Debug\KitchenNotesDAL.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\TestConsoleApp\bin\Debug\Helpers.pdb
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\TestConsoleApp\bin\Debug\KitchenNotesBLL.pdb
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\TestConsoleApp\bin\Debug\KitchenNotesDAL.pdb
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\TestConsoleApp\obj\Debug\TestConsoleApp.csprojResolveAssemblyReference.cache
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\TestConsoleApp\obj\Debug\TestConsoleApp.exe
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\TestConsoleApp\obj\Debug\TestConsoleApp.pdb

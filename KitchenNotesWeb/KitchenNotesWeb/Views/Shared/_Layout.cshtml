@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -15,6 +14,7 @@
     @Styles.Render("~/Content/plugins/morris.css")
     @Styles.Render("~/Content/calendar.css")
     @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/bootstrap-editable.css")
     @Styles.Render("~/Content/bootstrap-datetimepicker.css")
     @Scripts.Render("~/bundles/modernizr")
     
@@ -36,11 +36,11 @@
                 </button>
                 @if (Request.IsAuthenticated)
                 {
-                    <a class="navbar-brand" href="@Url.Action("Index","Home")">Kitchen Notes : @{Html.RenderAction("HubName", "Home", new { username = User.Identity.Name });} </a>
+                    <a class="navbar-brand" href="@Url.Action("Index","Home")">@{Html.RenderAction("HubName", "Home", new { username = User.Identity.Name });} </a>
                 }
                 else
                 {
-                     <a class="navbar-brand" href="@Url.Action("Index","Home")">Kitchen Notes </a>
+                     <a class="navbar-brand" href="@Url.Action("Index","Home")">Kitchen Notes</a>
                 }
 
 
@@ -139,7 +139,10 @@
                                 <a href="@Url.Action("AccountInfo", "User", new { username = User.Identity.Name })"><i class="fa fa-fw fa-user"></i> Profile</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                                <a href="@Url.Action("NewHub", "User")"><i class="fa fa-fw fa-plus"></i> New Hub</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("JoinHub", "User")"><i class="fa fa-fw fa-link"></i> Join Hub</a>
                             </li>
                             <li class="divider"></li>
                             <li>
@@ -207,6 +210,7 @@
     
     @Scripts.Render("~/Scripts/moment.js")
     @Scripts.Render("~/Scripts/bootstrap-datetimepicker.js")
+    @Scripts.Render("~/Scripts/bootstrap-editable.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>

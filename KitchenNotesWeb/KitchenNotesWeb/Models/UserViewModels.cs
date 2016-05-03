@@ -60,6 +60,7 @@ namespace KitchenNotesWeb.Models
         public string Password { get; set; }
         public DateTime DOB { get; set; }
         public string UserEmail { get; set; }
+        public DateTime LastLogin { get; set; }
 
     }
 

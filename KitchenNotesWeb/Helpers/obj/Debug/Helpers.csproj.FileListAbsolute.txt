@@ -1,0 +1,5 @@
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\Helpers\bin\Debug\Helpers.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\Helpers\bin\Debug\Helpers.pdb
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\Helpers\obj\Debug\Helpers.csprojResolveAssemblyReference.cache
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\Helpers\obj\Debug\Helpers.dll
+C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\Helpers\obj\Debug\Helpers.pdb

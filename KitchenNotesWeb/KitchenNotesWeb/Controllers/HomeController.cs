@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using KitchenNotesBLL;
 using KitchenNotesDAL;
 using KitchenNotesWeb.Models;
+using System.Web.Security;
 
 namespace KitchenNotesWeb.Controllers
 {
@@ -34,6 +35,11 @@ namespace KitchenNotesWeb.Controllers
                 });
             }
             return View(model);
+        }
+
+        public ActionResult ModalLogin()
+        {
+            return View();
         }
 
         [Route("ChangeCurrentHub")]
@@ -149,10 +155,29 @@ namespace KitchenNotesWeb.Controllers
                     Surname = u.Surname,
                     DOB = u.DOB,
                     UserEmail = u.Email,
-                    Password = u.Password
+                    Password = u.Password,
+                    LastLogin = u.LastLogin
                 });
             }
             return uDetails;
+        }
+
+        [HttpPost]
+        public ActionResult ModalLogin(UserLogin user)
+        {
+            if (ModelState.IsValid)
+            {
+                if (KitchenNotesUser.isUserValid(user.username, user.password))
+                {
+                    FormsAuthentication.SetAuthCookie(user.username, user.rememberMe);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Login data is incorrect!");
+                }
+            }
+            return View(user);
         }
 
     }

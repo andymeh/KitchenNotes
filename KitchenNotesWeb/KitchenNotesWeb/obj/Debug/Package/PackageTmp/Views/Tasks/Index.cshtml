@@ -1,0 +1,23 @@
+﻿@model KitchenNotesWeb.Models.TasksIndexModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2></h2>
+<div class="row">
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-newspaper-o fa-fw"></i> New Note</h3>
+
+            </div>
+            <div class="panel-body">
+                @{Html.RenderPartial("NewTask", Model.taskModel);}
+            </div>
+        </div>
+    </div>
+
+    @{Html.RenderPartial("ViewHubTasks", Model.taskList);}
+
+</div>

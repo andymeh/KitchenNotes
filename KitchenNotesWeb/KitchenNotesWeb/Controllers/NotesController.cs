@@ -40,6 +40,14 @@ namespace KitchenNotesWeb.Controllers
             return View(model);
         }
 
+        public ActionResult EditNote(Guid noteId)
+        {
+            Notes note = KitchenNotesNotes.getNote(noteId);
+            var model = new EditNotesModel();
+            model.noteId = note.NoteId;
+            return View(model);
+        }
+
         [Authorize]
         [HttpPost]
         public ActionResult AddNote(string username, string note)
@@ -126,36 +134,33 @@ namespace KitchenNotesWeb.Controllers
         [HttpGet]
         public ActionResult DeleteNote(Guid? NoteId)
         {
-            if(NoteId != null)
-            {
-                KitchenNotesNotes.deleteNote((Guid) NoteId);
-            }
-            return Redirect(Request.UrlReferrer.ToString());
-        }
 
-        [Authorize]
-        [Route("IsUserHubAdmin")]
-        [HttpGet]
-        public bool IsUserAdmin()
-        {
             User user = KitchenNotesUser.getUser(User.Identity.Name);
             UserHub uHub = KitchenNotesUserHub.getCurrentUserHub(user.CurrentHub, user.UserId);
-            bool isAdmin = KitchenNotesUser.isUserAdmin(uHub.UserHubId);
-
-            return isAdmin;
+            Guid _noteId = NoteId.GetValueOrDefault();
+            if (_noteId != null || _noteId != Guid.Empty)
+            {
+                Notes note = KitchenNotesNotes.getNote(_noteId);
+                if (note.UserHubId == uHub.UserHubId || KitchenNotesUser.isUserAdmin(uHub.UserHubId))
+                {
+                    KitchenNotesNotes.deleteNote(_noteId);
+                }
+            }
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         [Authorize]
         [Route("EditNote")]
-        [HttpGet]
-        public ActionResult EditNote(NewNotesModel editedNote)
+        [HttpPost]
+        public ActionResult EditNote(EditNotesModel editedNote)
         {
             if (ModelState.IsValid)
             {
-
+                Notes note = KitchenNotesNotes.getNote(editedNote.noteId);
+                note.Note = editedNote.noteContent;
+                KitchenNotesNotes.editNote(note);
             }
-
-            return Redirect(Request.UrlReferrer.ToString());
+            return View(editedNote);
         }
         
 

@@ -6,7 +6,7 @@
 }
 @if (Request.IsAuthenticated)
 {
-<h2>Index</h2>
+<h2>Notes</h2>
 <div class="row">
     <div class="col-lg-4">
         <div class="panel panel-default">
@@ -21,8 +21,16 @@
     </div>
     
     @{Html.RenderPartial("ViewHubNotes", Model.noteList);}
-            
+     
 </div>
+@section scripts{
+    <script type="text/javascript">
+        $.fn.editable.defaults.mode = 'inline';
+        $(document).ready(function () {
+            $('#username').editable();
+        });
+    </script>
+}
 
     }
 

@@ -1,0 +1,18 @@
+﻿<div class="jumbotron">
+
+    @if (Request.IsAuthenticated)
+    {
+        <h1>Welcome @Html.Encode(User.Identity.Name)</h1>
+    }
+    else
+    {
+        <h1>Please Sign in Or Register</h1>
+        <ul class="nav navbar-nav navbar-right">
+            <li><button type="button" class="btn btn-success btn-lg" onclick="location.href='@Url.Action("Register", "User")'">Register new Hub</button></li>
+            <li><button type="button" class="btn btn-info btn-lg" onclick="location.href='@Url.Action("NewUser", "User")'">Join a Hub</button></li>
+            <li><button type="button" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("Login", "User")'">Sign In</button></li>
+        </ul>
+    }
+
+</div>
+

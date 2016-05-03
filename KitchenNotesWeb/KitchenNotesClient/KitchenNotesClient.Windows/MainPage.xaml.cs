@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace KitchenNotesClient
@@ -25,6 +26,15 @@ namespace KitchenNotesClient
         public MainPage()
         {
             this.InitializeComponent();
+            
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            string HubRef = txtHubRefId.Text;
+            string Username = txtUsername.Text;
+            string Password = txtPassword.Text;
+
         }
     }
 }

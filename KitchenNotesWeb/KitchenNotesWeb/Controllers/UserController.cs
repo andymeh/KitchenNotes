@@ -38,6 +38,11 @@ namespace KitchenNotesWeb.Controllers
         {
             return View();
         }
+
+        public ActionResult JoinHub()
+        {
+            return View();
+        }
         [Authorize]
         public ActionResult AccountInfo(string username)
         {
@@ -48,7 +53,8 @@ namespace KitchenNotesWeb.Controllers
                 Forename = user.Forename,
                 Surname = user.Surname,
                 DOB = user.DOB,
-                UserEmail = user.Email
+                UserEmail = user.Email,
+                LastLogin = user.LastLogin
             };
             return View(model);
         }
@@ -87,23 +93,7 @@ namespace KitchenNotesWeb.Controllers
             return View(user);
         }
 
-        [HttpPost]
-        public ActionResult ModalLogin(HomeUserModel user)
-        {
-            if (ModelState.IsValid)
-            {
-                if (KitchenNotesUser.isUserValid(user.userlogin.username, user.userlogin.password))
-                {
-                    FormsAuthentication.SetAuthCookie(user.userlogin.username, user.userlogin.rememberMe);
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Login data is incorrect!");
-                }
-            }
-            return View(user);
-        }
+        
         public ActionResult Logout()
         {
             KitchenNotesUser.updateLastLogin(User.Identity.Name);
@@ -118,21 +108,21 @@ namespace KitchenNotesWeb.Controllers
             {
                 if (userReg.Password == userReg.Password2)
                 {
-                    Guid HubId = KitchenNotesHub.addHubReturnId(userReg.HubName);
-                    User newUser = new User()
-                    {
-                        Username = userReg.UserName,
-                        Forename = userReg.Forename,
-                        Surname = userReg.Surname,
-                        Email = userReg.UserEmail,
-                        DOB = userReg.DOB,
-                        Password = SHA1.Encode(userReg.Password),
-                        CurrentHub = HubId,
-                        LastLogin = DateTime.Now
-                    };
-
                     if (!KitchenNotesUser.UserNameExists(userReg.UserName))
                     {
+                        Guid HubId = KitchenNotesHub.addHubReturnId(userReg.HubName);
+                        User newUser = new User()
+                        {
+                            Username = userReg.UserName,
+                            Forename = userReg.Forename,
+                            Surname = userReg.Surname,
+                            Email = userReg.UserEmail,
+                            DOB = userReg.DOB,
+                            Password = SHA1.Encode(userReg.Password),
+                            CurrentHub = HubId,
+                            LastLogin = DateTime.Now
+                        };
+
                         KitchenNotesUser.addNewUserToExistingHub(newUser, HubId);
                         FormsAuthentication.SetAuthCookie(newUser.Username, true);
                         KitchenNotesUser.addUserAsAdmin(newUser.Username);
@@ -200,9 +190,21 @@ namespace KitchenNotesWeb.Controllers
 
         [Authorize]
         [HttpPost]
-        public void ChangeHub(string cHubId)
+        public void JoinHub(string HubReference)
         {
 
+        }
+
+        [Authorize]
+        [Route("IsUserHubAdmin")]
+        [HttpGet]
+        public bool IsUserAdmin()
+        {
+            User user = KitchenNotesUser.getUser(User.Identity.Name);
+            UserHub uHub = KitchenNotesUserHub.getCurrentUserHub(user.CurrentHub, user.UserId);
+            bool isAdmin = KitchenNotesUser.isUserAdmin(uHub.UserHubId);
+
+            return isAdmin;
         }
 
     }

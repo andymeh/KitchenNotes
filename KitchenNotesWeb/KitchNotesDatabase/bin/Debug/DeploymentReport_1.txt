@@ -1,0 +1,21 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[Family] (Table)
+       [dbo].[Notes] (Table)
+       [dbo].[User] (Table)
+       [dbo].[UserFamily] (Table)
+       [dbo].[fk_UserFamilyId] (Foreign Key)
+       [dbo].[fk_UserId] (Foreign Key)
+       [dbo].[fk_FamilyId] (Foreign Key)
+
+** Supporting actions

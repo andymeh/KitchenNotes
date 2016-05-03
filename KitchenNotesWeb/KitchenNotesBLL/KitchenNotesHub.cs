@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using KitchenNotesDAL;
 using Helpers;
+using System.Data.SqlClient;
 
 namespace KitchenNotesBLL
 {
@@ -23,7 +24,7 @@ namespace KitchenNotesBLL
 
         public static List<UserHub> lstUserHubs(Guid userId)
         {
-            using(var dc = new DALDataContext())
+            using (var dc = new DALDataContext())
             {
                 List<UserHub> lstUserHubs = dc.UserHubs.Where(x => x.UserId == userId).ToList();
                 return lstUserHubs;
@@ -32,10 +33,10 @@ namespace KitchenNotesBLL
 
         public static List<Hub> lstHubDetails(List<UserHub> userHubs)
         {
-            using(var db = new DALDataContext())
+            using (var db = new DALDataContext())
             {
                 List<Hub> lstHubDetails = new List<Hub>();
-                foreach(var uh in userHubs)
+                foreach (var uh in userHubs)
                 {
                     lstHubDetails.Add(db.Hubs.First(x => x.HubId == uh.HubId));
                 }
@@ -57,11 +58,11 @@ namespace KitchenNotesBLL
 
         public static List<User> getUsersInHub(Guid HubId)
         {
-            using(var db = new DALDataContext())
+            using (var db = new DALDataContext())
             {
                 List<UserHub> allUserHubs = db.UserHubs.Where(x => x.HubId == HubId).ToList();
                 List<User> allUsersInHub = new List<User>();
-                foreach(var u in allUserHubs)
+                foreach (var u in allUserHubs)
                 {
                     allUsersInHub.Add(db.Users.First(x => x.UserId == u.UserId));
                 }
@@ -93,12 +94,13 @@ namespace KitchenNotesBLL
 
     public class KitchenNotesUser
     {
-        public static bool UserNameExists(string username) {
+        public static bool UserNameExists(string username)
+        {
             using (var db = new DALDataContext())
             {
                 List<User> user = db.Users.Where(x => x.Username == username).ToList();
-                
-                if (user.Count == 0 )
+
+                if (user.Count == 0)
                 {
                     return false;
                 }
@@ -116,7 +118,7 @@ namespace KitchenNotesBLL
                 User user = new User();
                 if (username != null && username != "")
                 {
-                    user = db.Users.First(x => x.Username == username); 
+                    user = db.Users.First(x => x.Username == username);
                 }
                 return user;
             }
@@ -158,7 +160,7 @@ namespace KitchenNotesBLL
             {
                 User _user = new User();
                 UserHub _userHub = db.UserHubs.First(x => x.UserHubId == userHubId);
-                if(_userHub != null)
+                if (_userHub != null)
                 {
                     _user = db.Users.First(x => x.UserId == _userHub.UserId);
                 }
@@ -178,17 +180,27 @@ namespace KitchenNotesBLL
             }
 
         }
+        public static void addUserAsAdmin(string username, Guid _hubId)
+        {
+            using (var db = new DALDataContext())
+            {
+                User user = getUser(username);
+                UserHub uHub = db.UserHubs.First(x => x.HubId == _hubId);
+                uHub.HubAdmin = true;
+                db.SubmitChanges();
+            }
+        }
 
         public static bool isUserAdmin(Guid userHubId)
         {
-            using( var db = new DALDataContext())
+            using (var db = new DALDataContext())
             {
                 UserHub uHub = db.UserHubs.First(x => x.UserHubId == userHubId);
                 bool isAdmin = uHub.HubAdmin;
                 return isAdmin;
             }
         }
-        
+
 
         public static void addNewUserToExistingHub(string newUsername, string oldHubName, string password, string newUserForename, string userHubId)
         {
@@ -198,10 +210,10 @@ namespace KitchenNotesBLL
             using (var dc = new DALDataContext())
             {
                 oHubList = dc.Hubs.Where(x => x.HubName == oldHubName).ToList();
-                foreach(Hub f in oHubList)
+                foreach (Hub f in oHubList)
                 {
                     string HubIdString = f.HubId.ToString();
-                    if(HubIdString.StartsWith(userHubId))
+                    if (HubIdString.StartsWith(userHubId))
                     {
                         oHub = f;
                     }
@@ -221,37 +233,65 @@ namespace KitchenNotesBLL
             using (var dc = new DALDataContext())
             {
                 oHub = dc.Hubs.FirstOrDefault(x => x.HubId == hubId);
-                
-                UserHub nUserHub = Entities.createUserHub(oHub.HubId, newUser.UserId);
-                dc.Users.InsertOnSubmit(newUser);
-                dc.UserHubs.InsertOnSubmit(nUserHub);
-                dc.SubmitChanges();
-
+                if(oHub != null)
+                {
+                    UserHub nUserHub = Entities.createUserHub(oHub.HubId, newUser.UserId);
+                    dc.Users.InsertOnSubmit(newUser);
+                    dc.UserHubs.InsertOnSubmit(nUserHub);
+                    dc.SubmitChanges();
+                }
             }
         }
 
+        public static void addUserToHub(Guid userId, Guid hubId)
+        {
+            using (var dc = new DALDataContext())
+            {
+                UserHub uHub = new UserHub { UserHubId = new Guid(), UserId = userId, HubId = hubId };
+                dc.UserHubs.InsertOnSubmit(uHub);
+                dc.SubmitChanges();
+            }
+        }
+
+        public static void removeUserFromHub(Guid userId, Guid hubId)
+        {
+            using (var dc = new DALDataContext())
+            {
+                UserHub uHub = dc.UserHubs.First(x => x.HubId == hubId && x.UserId == userId);
+                dc.UserHubs.DeleteOnSubmit(uHub);
+                dc.SubmitChanges();
+            }
+        }
         public static bool isUserValid(String username, String password)
         {
             using (var db = new DALDataContext())
             {
-                List<User> user = db.Users.Where(x => x.Username == username).ToList();
-                
-                if (user != null && user.Count != 0)
+                try
                 {
-                    String encodedPw = SHA1.Encode(password);
-                    if (user.First().Password == encodedPw)
+                    List<User> user = db.Users.Where(x => x.Username == username).ToList();
+
+                    if (user != null && user.Count != 0)
                     {
-                        return true;
+                        String encodedPw = SHA1.Encode(password);
+                        if (user.First().Password == encodedPw)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
                     else
                     {
                         return false;
                     }
                 }
-                else
+                catch(SqlException e)
                 {
-                    return false;
+
                 }
+                return false;
             }
         }
     }
@@ -273,6 +313,16 @@ namespace KitchenNotesBLL
             using(var db = new DALDataContext())
             {
                 db.Notes.DeleteOnSubmit(db.Notes.First(x => x.NoteId == noteId));
+                db.SubmitChanges();
+            }
+        }
+
+        public static void editNote(Notes editedNote)
+        {
+            using (var db = new DALDataContext())
+            {
+                Notes oldNote = db.Notes.FirstOrDefault(x => x.NoteId == editedNote.NoteId);
+                oldNote.Note = editedNote.Note;
                 db.SubmitChanges();
             }
         }
@@ -346,6 +396,15 @@ namespace KitchenNotesBLL
                 }
                 return hubNotes;
             }
+        }
+
+        public static Notes getNote(Guid _noteId)
+        {
+            using (var db = new DALDataContext())
+            {
+                Notes note = db.Notes.FirstOrDefault(x => x.NoteId == _noteId);
+                return note;
+            }
 
         }
     }
@@ -369,7 +428,6 @@ namespace KitchenNotesBLL
                 return allUserHubs;
             }
         }
-
     }
 
     public class KitchenNotesEvents
@@ -426,10 +484,42 @@ namespace KitchenNotesBLL
     {
         public static void addTask(Tasks newTask)
         {
-            using(var dc = new DALDataContext())
+            using (var dc = new DALDataContext())
             {
                 dc.Tasks.InsertOnSubmit(newTask);
                 dc.SubmitChanges();
+            }
+        }
+
+        public static void deleteTask(Guid _taskId)
+        {
+            using(var dc = new DALDataContext())
+            {
+                dc.Tasks.DeleteOnSubmit(dc.Tasks.First(x => x.TaskId == _taskId));
+                dc.SubmitChanges();
+            }
+        }
+
+        public static Tasks getTask(Guid _TaskId)
+        {
+            using(var db = new DALDataContext())
+            {
+                Tasks task = db.Tasks.FirstOrDefault(x => x.TaskId == _TaskId);
+                return task;
+            }
+        }
+
+        public static List<Tasks> getAllHubTasks(Guid _HubId)
+        {
+            using(var db = new DALDataContext())
+            {
+                List<Tasks> hubTasks = new List<Tasks>();
+                List<UserHub> lstUserHubs = db.UserHubs.Where(x => x.HubId == _HubId).ToList();
+                foreach (var uHub in lstUserHubs)
+                {
+                    hubTasks.AddRange(db.Tasks.Where(x => x.UserHubId == uHub.UserHubId));
+                }
+                return hubTasks; 
             }
         }
 
@@ -438,20 +528,7 @@ namespace KitchenNotesBLL
             using (var db = new DALDataContext())
             {
                 List<Tasks> hubTasks = new List<Tasks>();
-                List<UserHub> lstUserHub = db.UserHubs.Where(i => i.UserHubId == _UserHubId).ToList();
-                if (lstUserHub != null && lstUserHub.Count != 0)
-                {
-                    List<Guid> lstUserHubIds = new List<Guid>();
-                    foreach (UserHub uh in lstUserHub)
-                    {
-                        lstUserHubIds.Add(uh.UserHubId);
-                    }
-                    foreach (Guid x in lstUserHubIds)
-                    {
-                        hubTasks.AddRange(db.Tasks.Where(i => i.UserHubId == x));
-                    }
-
-                }
+                hubTasks.AddRange(db.Tasks.Where(i => i.UserHubId == _UserHubId));
                 return hubTasks;
             }
 
@@ -465,10 +542,18 @@ namespace KitchenNotesBLL
                 alluserTasks.AddRange(db.Tasks.Where(x => x.AssignedTo.Equals(username)));
                 return alluserTasks;
             }
-
         }
 
-
+        public static void editTask(Tasks newTask)
+        {
+            using (var db = new DALDataContext())
+            {
+                Tasks oldTask = db.Tasks.FirstOrDefault(x => x.TaskId == newTask.TaskId);
+                oldTask.TaskDetail = newTask.TaskDetail;
+                oldTask.AssignedTo = newTask.AssignedTo;
+                db.SubmitChanges();
+            }
+        }
     }
     
     public class Entities

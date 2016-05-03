@@ -1,0 +1,41 @@
+﻿@model KitchenNotesWeb.Models.NotesIndexModel
+@{
+    
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Request.IsAuthenticated)
+{
+<h2>Notes</h2>
+<div class="row">
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-newspaper-o fa-fw"></i> New Note</h3>
+
+            </div>
+            <div class="panel-body">
+                @{Html.RenderPartial("NewNote", Model.noteModel);}
+            </div>
+        </div>
+    </div>
+    
+    @{Html.RenderPartial("ViewHubNotes", Model.noteList);}
+     
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $.fn.editable.defaults.mode = 'inline';
+        $(document).ready(function () {
+            $('#username').editable();
+        });
+    </script>
+}
+
+    }
+
+    else
+    {
+
+    }
+

@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<KitchenNotesWeb.Models.DetailedNoteModel>
-@{string IsUserAdmin = Html.Action("IsUserAdmin", "Notes").ToString();}
+@{string IsUserAdmin = Html.Action("IsUserAdmin", "User").ToString();}
 
 
 @if (Model != null && Model.Count() > 0)
@@ -13,11 +13,11 @@
                     @if (string.Equals(item.username, User.Identity.Name, StringComparison.CurrentCultureIgnoreCase) || IsUserAdmin.Equals("True"))
                     {
                         <div class="pull-right">
-                            <a href=''><i class="glyphicon glyphicon-edit"></i></a>
+                            <a href='@Url.Action("EditNote", "Notes", new { NoteId = item.note.NoteId })'><i class="glyphicon glyphicon-edit"></i></a>
                             <a href='@Url.Action("DeleteNote", "Notes", new { NoteId = item.note.NoteId })'><i class="glyphicon glyphicon-trash"></i> </a>
                         </div>
                     }
-                    <h3 class="panel-title"><i class="fa fa-newspaper-o fa-fw"></i><a onclick="location.href='@Url.Action("AccountInfo", "User", new { username = item.username })'">@Html.DisplayFor(modelItem => item.username)</a>  : @Html.DisplayFor(modelItem => item.forename) </h3>
+                    <h3 class="panel-title"><i class="fa fa-newspaper-o fa-fw"></i><a class="activeLink" onclick="location.href='@Url.Action("AccountInfo", "User", new { username = item.username })'">@Html.DisplayFor(modelItem => item.username)</a>  : @Html.DisplayFor(modelItem => item.forename) </h3>
                     
                 </div>
                 <div class="panel-body mypanel" style="word-wrap:break-word; padding-bottom:5px">
@@ -35,6 +35,17 @@
             </div>
         </div>
     }
+}
+
+<a href="#" id="username" data-type="text" data-pk="1" data-url="/post" data-title="Enter username">superuser</a>
+
+@section scripts{
+    <script type="text/javascript">
+        $.fn.editable.defaults.mode = 'inline';
+        $(document).ready(function () {
+            $('#username').editable();
+        });
+    </script>
 }
 
 

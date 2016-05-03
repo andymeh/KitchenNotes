@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<!-- Page Heading -->
+
 @if (Request.IsAuthenticated)
 {
     <div class="row">
@@ -22,7 +22,6 @@
                         <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("ChangeCurrentHub", "Home", new { hubGuid = hub.HubId })'">@hub.hubName</button>
                     </div>
                 }
-
             }
         </div>
     </div>
@@ -30,10 +29,33 @@
         <div class="jumbotron">
             <div class="container">
                 <div class="row well well-lg">
-                    <div class="col-md-6 col-md-offset-3 centerfy">
+                    <div class="col-md-6 ">
                         <h1>Welcome @Html.Encode(User.Identity.Name)</h1>
                         <h2 class="media-body">HubID : @{Html.RenderAction("HubIdRefs", "Home", new { username = User.Identity.Name });} </h2>
                         <h3>Share this ID with people you want to invite to this Hub</h3>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Last Login</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ var users = Model.userHubs.First(x => x.HubId == Model.currentHub);
+                                        foreach (var user in users.usersInHub)
+                                        {
+                                            <tr>
+                                                <td><a class="activeLink" onclick="location.href='@Url.Action("AccountInfo", "User", new { username = user.username })'">@user.Forename @user.Surname</a></td>
+                                                <td>@user.LastLogin</td>
+                                            </tr>
+                                        }
+                                    }
+                               </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -131,50 +153,13 @@
                 </div>
             </div>
 
-            }
+}
 
-            else
-            {
+else
+{
 
-            <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                <div class="modal-dialog">
-                    <div class="loginmodal-container">
-                        <h1>Login to Your Account</h1><br>
-                        @using (Html.BeginForm("ModalLogin", "User", FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="form-group">
-                                @Html.EditorFor(model => model.userlogin.username, new { htmlAttributes = new { @type = "text", name = "user", placeholder = "Username" } })
-                                @Html.ValidationMessageFor(model => model.userlogin.username, "", new { @class = "text-danger" })
-                            </div>
-
-                            <div class="form-group">
-                                @Html.EditorFor(model => model.userlogin.password, new { htmlAttributes = new { @type = "password", @name = "pass", @placeholder = "Password" } })
-                                @Html.ValidationMessageFor(model => model.userlogin.password, "", new { @class = "text-danger" })
-                            </div>
-
-                            <div class="form-group">
-                                Remember Me
-                                <div class="checkbox" , style="float:right">
-                                    @Html.EditorFor(model => model.userlogin.rememberMe, new { htmlAttributes = new { @type = "checkbox", @name = "check" } })
-                                    @Html.ValidationMessageFor(model => model.userlogin.rememberMe, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <input type="submit" name="login" class="login loginmodal-submit" value="Login">
-                            </div>
-                        }
-
-                        <div class="login-help">
-                            <a href='@Url.Action("Register", "User")'>New Hub</a> - <a href='@Url.Action("NewUser", "User")'>Join Hub</a> - <a href="#">Forgot Password</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @section Scripts{
+              Html.RenderPartial("ModalLogin",Model.userlogin);
+              @section Scripts{
                 <script type="text/javascript">
                     $(document).ready(function () {
                         $('#login-modal').modal('show');
@@ -182,10 +167,4 @@
 
                 </script>
             }
-            }
-
-
-
-
-
-            <!-- /.row -->
+    }

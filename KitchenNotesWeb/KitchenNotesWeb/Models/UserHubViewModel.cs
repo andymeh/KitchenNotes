@@ -58,4 +58,9 @@ namespace KitchenNotesWeb.Models
         public string hubName { get; set; }
         public List<UserDetails> usersInHub { get; set; }
     }
+
+    public class JoinHub
+    {
+        public string HubReference { get; set; }
+    }
 }

@@ -13,6 +13,11 @@ body {
     overflow-y:auto;
 }
 
+.activeLink {
+   pointer-events: stroke;
+   cursor: pointer;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,

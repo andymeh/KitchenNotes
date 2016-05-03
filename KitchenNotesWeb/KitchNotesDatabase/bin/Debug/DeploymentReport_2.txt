@@ -1,0 +1,21 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[Hub] (Table)
+       [dbo].[Notes] (Table)
+       [dbo].[User] (Table)
+       [dbo].[UserHub] (Table)
+       [dbo].[fk_UserHubId] (Foreign Key)
+       [dbo].[fk_UserId] (Foreign Key)
+       [dbo].[fk_HubId] (Foreign Key)
+
+** Supporting actions

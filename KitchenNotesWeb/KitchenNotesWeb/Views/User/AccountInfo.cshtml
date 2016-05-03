@@ -1,5 +1,5 @@
 ﻿@model KitchenNotesWeb.Models.UserDetails
-
+@{string IsUserAdmin = Html.Action("IsUserAdmin", "User").ToString();}
 
 <div class="container">
     <div class="row">
@@ -47,8 +47,14 @@
                             <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
                             <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
                         }
+                        @if (IsUserAdmin.Equals("True"))
+                        {
+                            <a href="#" data-original-title="Make User Admin" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-star"></i></a>
+                        }
                     </span>
                 </div>
+
+                |
 
             </div>
         </div>

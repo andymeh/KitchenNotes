@@ -231,6 +231,7 @@
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-editable.css" />
     <Content Include="Content\bootstrap-rtl.css" />
     <Content Include="Content\bootstrap-rtl.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -353,9 +354,13 @@
     <Content Include="font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="img\clear.png" />
+    <Content Include="img\loading.gif" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap-editable.js" />
+    <Content Include="Scripts\bootstrap-editable.min.js" />
     <Content Include="Scripts\calendar.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -613,6 +618,11 @@
     <Content Include="Views\User\ManageAccount.cshtml" />
     <Content Include="Views\User\AccountInfo.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Home\ModalLogin.cshtml" />
+    <Content Include="Views\User\JoinHub.cshtml" />
+    <Content Include="Views\Tasks\ViewHubTasks.cshtml" />
+    <Content Include="Views\Notes\EditNote.cshtml" />
+    <Content Include="Views\Tasks\EditTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
