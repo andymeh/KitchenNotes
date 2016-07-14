@@ -180,5 +180,20 @@ namespace KitchenNotesWeb.Controllers
             return View(user);
         }
 
+        [HttpGet]
+        [Route("AppLogin")]
+        public JsonResult AppLogin(string hubRef,string username, string password)
+        {
+            Hub uHub = KitchenNotesHub.getHub(hubRef);
+            if (KitchenNotesUser.isUserValid(username, password) && uHub != null)
+            { 
+                return Json(String.Format("true, {0}, {1}", uHub.HubId,uHub.HubName), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("false", JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 }

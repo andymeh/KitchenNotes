@@ -132,15 +132,25 @@ namespace KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[3];
-            _typeNameTable[0] = "KitchenNotesUnivers.MainPage";
+            _typeNameTable = new string[8];
+            _typeNameTable[0] = "KitchenNotesUnivers.HomePage";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
+            _typeNameTable[3] = "String";
+            _typeNameTable[4] = "Guid";
+            _typeNameTable[5] = "System.ValueType";
+            _typeNameTable[6] = "Object";
+            _typeNameTable[7] = "KitchenNotesUnivers.LoginPage";
 
-            _typeTable = new global::System.Type[3];
-            _typeTable[0] = typeof(global::KitchenNotesUnivers.MainPage);
+            _typeTable = new global::System.Type[8];
+            _typeTable[0] = typeof(global::KitchenNotesUnivers.HomePage);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
+            _typeTable[3] = typeof(global::System.String);
+            _typeTable[4] = typeof(global::System.Guid);
+            _typeTable[5] = typeof(global::System.ValueType);
+            _typeTable[6] = typeof(global::System.Object);
+            _typeTable[7] = typeof(global::KitchenNotesUnivers.LoginPage);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -175,7 +185,8 @@ namespace KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo
             return -1;
         }
 
-        private object Activate_0_MainPage() { return new global::KitchenNotesUnivers.MainPage(); }
+        private object Activate_0_HomePage() { return new global::KitchenNotesUnivers.HomePage(); }
+        private object Activate_7_LoginPage() { return new global::KitchenNotesUnivers.LoginPage(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -187,9 +198,12 @@ namespace KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo
             switch (typeIndex)
             {
 
-            case 0:   //  KitchenNotesUnivers.MainPage
+            case 0:   //  KitchenNotesUnivers.HomePage
                 userType = new global::KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_0_MainPage;
+                userType.Activator = Activate_0_HomePage;
+                userType.AddMemberName("StringHubId");
+                userType.AddMemberName("HubId");
+                userType.AddMemberName("HubName");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -201,16 +215,94 @@ namespace KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo
             case 2:   //  Windows.UI.Xaml.Controls.UserControl
                 xamlType = new global::KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
+
+            case 3:   //  String
+                xamlType = new global::KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 4:   //  Guid
+                userType = new global::KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
+                userType.SetIsReturnTypeStub();
+                xamlType = userType;
+                break;
+
+            case 5:   //  System.ValueType
+                userType = new global::KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                xamlType = userType;
+                break;
+
+            case 6:   //  Object
+                xamlType = new global::KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 7:   //  KitchenNotesUnivers.LoginPage
+                userType = new global::KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_7_LoginPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
             }
             return xamlType;
         }
 
 
+        private object get_0_HomePage_StringHubId(object instance)
+        {
+            var that = (global::KitchenNotesUnivers.HomePage)instance;
+            return that.StringHubId;
+        }
+        private void set_0_HomePage_StringHubId(object instance, object Value)
+        {
+            var that = (global::KitchenNotesUnivers.HomePage)instance;
+            that.StringHubId = (global::System.String)Value;
+        }
+        private object get_1_HomePage_HubId(object instance)
+        {
+            var that = (global::KitchenNotesUnivers.HomePage)instance;
+            return that.HubId;
+        }
+        private void set_1_HomePage_HubId(object instance, object Value)
+        {
+            var that = (global::KitchenNotesUnivers.HomePage)instance;
+            that.HubId = (global::System.Guid)Value;
+        }
+        private object get_2_HomePage_HubName(object instance)
+        {
+            var that = (global::KitchenNotesUnivers.HomePage)instance;
+            return that.HubName;
+        }
+        private void set_2_HomePage_HubName(object instance, object Value)
+        {
+            var that = (global::KitchenNotesUnivers.HomePage)instance;
+            that.HubName = (global::System.String)Value;
+        }
 
         private global::Windows.UI.Xaml.Markup.IXamlMember CreateXamlMember(string longMemberName)
         {
             global::KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo.XamlMember xamlMember = null;
-            // No Local Properties
+            global::KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo.XamlUserType userType;
+
+            switch (longMemberName)
+            {
+            case "KitchenNotesUnivers.HomePage.StringHubId":
+                userType = (global::KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo.XamlUserType)GetXamlTypeByName("KitchenNotesUnivers.HomePage");
+                xamlMember = new global::KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo.XamlMember(this, "StringHubId", "String");
+                xamlMember.Getter = get_0_HomePage_StringHubId;
+                xamlMember.Setter = set_0_HomePage_StringHubId;
+                break;
+            case "KitchenNotesUnivers.HomePage.HubId":
+                userType = (global::KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo.XamlUserType)GetXamlTypeByName("KitchenNotesUnivers.HomePage");
+                xamlMember = new global::KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo.XamlMember(this, "HubId", "Guid");
+                xamlMember.Getter = get_1_HomePage_HubId;
+                xamlMember.Setter = set_1_HomePage_HubId;
+                break;
+            case "KitchenNotesUnivers.HomePage.HubName":
+                userType = (global::KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo.XamlUserType)GetXamlTypeByName("KitchenNotesUnivers.HomePage");
+                xamlMember = new global::KitchenNotesUnivers.KitchenNotesUnivers_XamlTypeInfo.XamlMember(this, "HubName", "String");
+                xamlMember.Getter = get_2_HomePage_HubName;
+                xamlMember.Setter = set_2_HomePage_HubName;
+                break;
+            }
             return xamlMember;
         }
     }

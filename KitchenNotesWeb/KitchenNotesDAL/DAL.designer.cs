@@ -51,7 +51,7 @@ namespace KitchenNotesDAL
     #endregion
 		
 		public DALDataContext() : 
-				base(global::KitchenNotesDAL.Properties.Settings.Default.KitchNotesDatabaseConnectionString3, mappingSource)
+				base(global::KitchenNotesDAL.Properties.Settings.Default.KitchNotesDatabaseConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}

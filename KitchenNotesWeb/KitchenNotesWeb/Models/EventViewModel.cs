@@ -45,17 +45,29 @@ namespace KitchenNotesWeb.Models
         public long start { get; set; }
         public long end { get; set; }
     }
+    public class AppEventModel
+    {
+        public Guid id { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        public string start { get; set; }
+        public string end { get; set; }
+    }
 
     public class EventDetailModel
     {
         public Guid id { get; set; }
+        [Display(Name ="Event")]
         public string title { get; set; }
+        [Display(Name = "Description")]
         public string description { get; set; }
 
         [JsonProperty(PropertyName = "class")]
         public string Class { get; set; }
         public string url { get; set; }
+        [Display(Name = "From")]
         public DateTime start { get; set; }
+        [Display(Name = "To")]
         public DateTime end { get; set; }
     }
 }

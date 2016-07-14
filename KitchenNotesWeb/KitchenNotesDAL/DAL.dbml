@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="KitchNotesDatabase" Class="DALDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=ANDY-PC;Initial Catalog=KitchNotesDatabase;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True" SettingsObjectName="KitchenNotesDAL.Properties.Settings" SettingsPropertyName="KitchNotesDatabaseConnectionString3" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=sqlserverkn.westeurope.cloudapp.azure.com;Initial Catalog=KitchNotesDatabase;User ID=AdminAndy;Encrypt=False;TrustServerCertificate=True" SettingsObjectName="KitchenNotesDAL.Properties.Settings" SettingsPropertyName="KitchNotesDatabaseConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Hub" Member="Hubs">
     <Type Name="Hub">
       <Column Name="HubId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />

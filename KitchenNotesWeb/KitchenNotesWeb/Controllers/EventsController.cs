@@ -109,6 +109,50 @@ namespace KitchenNotesWeb.Controllers
             return Content(@"{""success"": 1, ""result"": "+json+"}", "");
         }
 
+        [HttpGet]
+        public JsonResult appGetEvents(string requestHubId)
+        {
+            List<HubEvent> lstEvents = new List<HubEvent>();
+            List<AppEventModel> lstAppEvents = new List<AppEventModel>();
+            if (requestHubId != "")
+            {
+                Guid HubId = new Guid(requestHubId);
+                lstEvents.AddRange(KitchenNotesEvents.getEventsWithinDate(HubId, DateTime.UtcNow, DateTime.UtcNow.AddMonths(6)));
+                foreach (HubEvent he in lstEvents)
+                {
+                    lstAppEvents.Add(new AppEventModel
+                    {
+                        id = he.HubEventId,
+                        name = he.Name,
+                        description = "" + he.Description,
+                        start = he.StartDate.ToString("dd/MM HH:mm"),
+                        end = he.EndDate.ToString("dd/MM HH:mm")
+                    });
+                }
+            }
+            return Json(lstAppEvents, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        [Route("DeleteEvent")]
+        [HttpGet]
+        public ActionResult DeleteEvent(Guid? id)
+        {
+
+            User user = KitchenNotesUser.getUser(User.Identity.Name);
+            UserHub uHub = KitchenNotesUserHub.getCurrentUserHub(user.CurrentHub, user.UserId);
+            Guid _eventId = id.GetValueOrDefault();
+            if (_eventId != null || _eventId != Guid.Empty)
+            {
+                HubEvent Event = KitchenNotesEvents.getEvent(_eventId);
+                if (Event.UserHubId == uHub.UserHubId || KitchenNotesUser.isUserAdmin(uHub.UserHubId))
+                {
+                    KitchenNotesEvents.deleteEvent(_eventId);
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
         [Authorize]
         [HttpGet]
         public ActionResult EventDetail(string id)

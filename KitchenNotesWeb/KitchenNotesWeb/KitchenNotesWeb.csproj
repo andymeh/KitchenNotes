@@ -619,10 +619,10 @@
     <Content Include="Views\User\AccountInfo.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Home\ModalLogin.cshtml" />
-    <Content Include="Views\User\JoinHub.cshtml" />
     <Content Include="Views\Tasks\ViewHubTasks.cshtml" />
     <Content Include="Views\Notes\EditNote.cshtml" />
     <Content Include="Views\Tasks\EditTask.cshtml" />
+    <Content Include="Views\User\JoinHub.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

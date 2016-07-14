@@ -342,8 +342,11 @@
     <AppxPackagedFile Include="C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesUnivers\ApplicationInsights.config">
       <PackagePath>ApplicationInsights.config</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesUnivers\Properties\Default.rd.xml">
-      <PackagePath>Properties\Default.rd.xml</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesUnivers\Assets\HomePage.png">
+      <PackagePath>Assets\HomePage.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesUnivers\Assets\LoginPage.png">
+      <PackagePath>Assets\LoginPage.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesUnivers\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
@@ -371,6 +374,9 @@
     <AppxPackagedFile Include="C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesUnivers\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesUnivers\Properties\Default.rd.xml">
+      <PackagePath>Properties\Default.rd.xml</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Andy\Source\Repos\KitchenNotes\KitchenNotesWeb\KitchenNotesUnivers\bin\ARM\Debug\KitchenNotesUnivers.xr.xml">
       <PackagePath>KitchenNotesUnivers.xr.xml</PackagePath>

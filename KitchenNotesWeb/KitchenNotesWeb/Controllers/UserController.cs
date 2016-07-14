@@ -13,7 +13,6 @@ namespace KitchenNotesWeb.Controllers
 {
     public class UserController : Controller
     {
-        // GET: User
         public ActionResult Index()
         {
             return View();
@@ -40,6 +39,10 @@ namespace KitchenNotesWeb.Controllers
         }
 
         public ActionResult JoinHub()
+        {
+            return View();
+        }
+        public ActionResult NewHub()
         {
             return View();
         }
@@ -190,9 +193,24 @@ namespace KitchenNotesWeb.Controllers
 
         [Authorize]
         [HttpPost]
-        public void JoinHub(string HubReference)
+        public ActionResult JoinHub(string HubReference)
         {
-
+            if (ModelState.IsValid)
+            {
+                Hub hub = KitchenNotesHub.getHub(HubReference);
+                if (hub != null)
+                {
+                    User user = KitchenNotesUser.getUser(User.Identity.Name);
+                    KitchenNotesUser.addUserToHub(user.UserId, hub.HubId);
+                    KitchenNotesUser.ChangeCurrentHub(user.UserId, hub.HubId);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("0", "Hub not found!");
+                }
+            }
+            return View(HubReference);
         }
 
         [Authorize]

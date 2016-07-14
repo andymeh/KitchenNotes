@@ -81,6 +81,33 @@ namespace KitchenNotesWeb.Controllers
             return notes;
         }
 
+        [HttpGet]
+        [Route("GetHubNotes")]
+        public JsonResult appGetHubNotes(string requestHubId)
+        {
+            List<AppNoteModel> appNotes = new List<AppNoteModel>();
+            List<Notes> notes = new List<Notes>();
+            if (requestHubId != "")
+            {
+                Guid HubId = new Guid(requestHubId);
+                notes = KitchenNotesNotes.getAllHubNotes(HubId);
+                notes = notes.OrderByDescending(x => x.DateAdded).ToList();
+                foreach (Notes n in notes)
+                {
+                    User noteUser = KitchenNotesUser.getUserFromUserHubId(n.UserHubId);
+                    appNotes.Add(new AppNoteModel
+                    {
+                        noteId = n.NoteId,
+                        timeAgo = TimeAgo(n.DateAdded),
+                        username = noteUser.Username,
+                        forename = noteUser.Forename,
+                        noteContent = n.Note
+                    });
+                }
+            }
+            return Json(appNotes, JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize]
         [Route("GetDetailedHubNotes")]
         public List<DetailedNoteModel> getDetailedHubNotes(string username)

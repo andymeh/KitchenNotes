@@ -44,8 +44,8 @@
                     <span class="pull-right">
                         @if (string.Equals(Model.username, User.Identity.Name, StringComparison.CurrentCultureIgnoreCase))
                         {
-                            <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                            <a href="@Url.Action("ManageAccount", new { id = Model.username })" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                            
                         }
                         @if (IsUserAdmin.Equals("True"))
                         {
@@ -61,7 +61,6 @@
     </div>
 </div>
 <p>
-    @Html.ActionLink("Edit", "ManageAccount", new { id = Model.username }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
 

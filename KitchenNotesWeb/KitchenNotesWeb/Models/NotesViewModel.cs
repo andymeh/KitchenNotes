@@ -17,7 +17,14 @@ namespace KitchenNotesWeb.Models
         [Display(Name = "Posted")]
         public string timeAgo { get; set; }
     }
-
+    public class AppNoteModel
+    {
+        public Guid noteId { get; set; }
+        public string username { get; set; }
+        public string forename { get; set; }
+        public string timeAgo { get; set; }
+        public string noteContent { get; set; }
+    }
     public class NewNotesModel
     {
 

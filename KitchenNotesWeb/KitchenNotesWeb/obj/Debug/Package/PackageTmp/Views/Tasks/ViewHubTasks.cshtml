@@ -13,7 +13,7 @@
                     @if (string.Equals(item.username, User.Identity.Name, StringComparison.CurrentCultureIgnoreCase) || IsUserAdmin.Equals("True"))
                     {
                         <div class="pull-right">
-                            <a href=''><i class="glyphicon glyphicon-edit"></i></a>
+                            <a href='@Url.Action("EditTask", "Tasks", new { TaskId = item.task.TaskId })'><i class="glyphicon glyphicon-edit"></i></a>
                             <a href='@Url.Action("DeleteTask", "Tasks", new { TaskId = item.task.TaskId })'><i class="glyphicon glyphicon-trash"></i> </a>
                         </div>
                     }

@@ -77,6 +77,32 @@ namespace KitchenNotesWeb.Controllers
             }
             return detailedTaskList;
         }
+        [HttpGet]
+        public JsonResult appGetHubTasks(string requestHubId)
+        {
+            List<AppTaskModel> detailedTaskList = new List<AppTaskModel>();
+            if (requestHubId != "")
+            {
+                Guid HubId = new Guid(requestHubId);
+                List<Tasks> taskList = KitchenNotesTasks.getAllHubTasks(HubId);
+                taskList = taskList.OrderByDescending(x => x.DatePosted).ToList();
+                foreach (var t in taskList)
+                {
+                    User postUser = KitchenNotesUser.getUserFromUserHubId(t.UserHubId);
+                    detailedTaskList.Add(new AppTaskModel
+                    {
+                        taskId = t.TaskId,
+                        assignedTo = t.AssignedTo,
+                        taskDetail = t.TaskDetail,
+                        username = postUser.Username,
+                        forename = postUser.Forename,
+                        timeAgo = TimeAgo(t.DatePosted)
+                    });
+                }
+            }
+            
+            return Json(detailedTaskList,JsonRequestBehavior.AllowGet);
+        }
 
         private SelectList GetUsersInHub()
         {

@@ -13,7 +13,7 @@
                     @if (string.Equals(item.username, User.Identity.Name, StringComparison.CurrentCultureIgnoreCase) || IsUserAdmin.Equals("True"))
                     {
                         <div class="pull-right">
-                            <a href=''><i class="glyphicon glyphicon-edit"></i></a>
+                            <a href='@Url.Action("EditNote", "Notes", new { NoteId = item.note.NoteId })'><i class="glyphicon glyphicon-edit"></i></a>
                             <a href='@Url.Action("DeleteNote", "Notes", new { NoteId = item.note.NoteId })'><i class="glyphicon glyphicon-trash"></i> </a>
                         </div>
                     }
@@ -37,7 +37,6 @@
     }
 }
 
-<a href="#" id="username" data-type="text" data-pk="1" data-url="/post" data-title="Enter username">superuser</a>
 
 @section scripts{
     <script type="text/javascript">

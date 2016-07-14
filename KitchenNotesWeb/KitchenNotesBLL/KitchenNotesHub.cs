@@ -222,7 +222,6 @@ namespace KitchenNotesBLL
                 dc.Users.InsertOnSubmit(nUser);
                 dc.UserHubs.InsertOnSubmit(nUserHub);
                 dc.SubmitChanges();
-
             }
         }
 
@@ -247,8 +246,19 @@ namespace KitchenNotesBLL
         {
             using (var dc = new DALDataContext())
             {
-                UserHub uHub = new UserHub { UserHubId = new Guid(), UserId = userId, HubId = hubId };
+                UserHub uHub = new UserHub { UserHubId = Guid.NewGuid(), UserId = userId, HubId = hubId };
                 dc.UserHubs.InsertOnSubmit(uHub);
+                dc.SubmitChanges();
+            }
+        }
+
+        public static void deleteUserFromHub(Guid userId, Guid HubId)
+        {
+            using (var dc = new DALDataContext())
+            {
+                UserHub uHub = dc.UserHubs.First(x => x.UserId == userId && x.HubId == HubId);
+                
+                dc.UserHubs.DeleteOnSubmit(uHub);
                 dc.SubmitChanges();
             }
         }
@@ -459,7 +469,7 @@ namespace KitchenNotesBLL
                 return lstHubEvents;
             }
         }
-
+        
         public static void addEvent(HubEvent newEvent)
         {
             using(var db = new DALDataContext())
@@ -476,6 +486,16 @@ namespace KitchenNotesBLL
                 HubEvent hEvent = new HubEvent();
                 hEvent = db.HubEvents.First(x => x.HubEventId == EventId);
                 return hEvent;
+            }
+        }
+
+        public static void deleteEvent(Guid _eventId)
+        {
+            using(var dc = new DALDataContext())
+            {
+                HubEvent Event = dc.HubEvents.First(x => x.HubEventId == _eventId);
+                dc.HubEvents.DeleteOnSubmit(Event);
+                dc.SubmitChanges();
             }
         }
     }

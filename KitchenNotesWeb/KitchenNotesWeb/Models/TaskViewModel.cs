@@ -32,6 +32,16 @@ namespace KitchenNotesWeb.Models
         public Tasks task { get; set; }
     }
 
+    public class AppTaskModel
+    {
+        public Guid taskId { get; set; }
+        public string username { get; set; }
+        public string forename { get; set; }
+        public string taskDetail { get; set; }
+        public string timeAgo { get; set; }
+        public string assignedTo { get; set; }
+    }
+
     public class TasksIndexModel
     {
         public IEnumerable<DetailedTaskModel> taskList { get; set; }
@@ -41,8 +51,10 @@ namespace KitchenNotesWeb.Models
     public class EditTaskModel
     {
         public Guid taskId { get; set; }
+        [Display(Name ="Task Detail")]
         [Required(ErrorMessage = "Task detail is required!")]
         public string taskDetail { get; set; }
+        [Display(Name = "Assigned To")]
         public string assignedTo { get; set; }
         public List<User> hubUsers { get; set; }
         public SelectList userList { get; set; }
