@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="KitchNotesDatabaseEntities-Web.config Connection String" description="KitchNotesDatabaseEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/DBModel.csdl|res://*/DBModel.ssdl|res://*/DBModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=sqlserverkn.westeurope.cloudapp.azure.com;initial catalog=KitchNotesDatabase;persist security info=True;user id=AdminAndy;password=Graham@2015;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Andy\\Source\\Repos\\KitchenNotes\\KitchenNotesWeb\\UniversalAppService\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='KitchNotesDatabaseEntities']/@connectionString" />
+  </parameter>
+</parameters>

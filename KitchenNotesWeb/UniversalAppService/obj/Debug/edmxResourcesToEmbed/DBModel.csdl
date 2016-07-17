@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KitchNotesDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Hub">
+    <Key>
+      <PropertyRef Name="HubId" />
+    </Key>
+    <Property Name="HubId" Type="Guid" Nullable="false" />
+    <Property Name="HubName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="HubAddress" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="HubLocation" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="UserHubs" Relationship="Self.fk_HubId" FromRole="Hub" ToRole="UserHub" />
+  </EntityType>
+  <EntityType Name="HubEvent">
+    <Key>
+      <PropertyRef Name="HubEventId" />
+    </Key>
+    <Property Name="HubEventId" Type="Guid" Nullable="false" />
+    <Property Name="UserHubId" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Importance" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="UserHub" Relationship="Self.FK_HubEvents_UserHub" FromRole="HubEvents" ToRole="UserHub" />
+  </EntityType>
+  <EntityType Name="Notes">
+    <Key>
+      <PropertyRef Name="NoteId" />
+    </Key>
+    <Property Name="NoteId" Type="Guid" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserHubId" Type="Guid" Nullable="false" />
+    <Property Name="DateEdited" Type="DateTime" Precision="3" />
+    <Property Name="DateHidden" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="UserHub" Relationship="Self.fk_UserHubId" FromRole="Notes" ToRole="UserHub" />
+  </EntityType>
+  <EntityType Name="Tasks">
+    <Key>
+      <PropertyRef Name="TaskId" />
+    </Key>
+    <Property Name="TaskId" Type="Guid" Nullable="false" />
+    <Property Name="TaskDetail" Type="String" MaxLength="200" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="AssignedTo" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="UserHubId" Type="Guid" Nullable="false" />
+    <Property Name="Completed" Type="Boolean" Nullable="false" />
+    <Property Name="Hidden" Type="Boolean" Nullable="false" />
+    <Property Name="DatePosted" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="UserHub" Relationship="Self.UserHubId" FromRole="Tasks" ToRole="UserHub" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Forename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Email" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="CurrentHub" Type="Guid" Nullable="false" />
+    <Property Name="LastLogin" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="UserHubs" Relationship="Self.fk_UserId" FromRole="User" ToRole="UserHub" />
+  </EntityType>
+  <EntityType Name="UserHub">
+    <Key>
+      <PropertyRef Name="UserHubId" />
+    </Key>
+    <Property Name="UserHubId" Type="Guid" Nullable="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="HubId" Type="Guid" Nullable="false" />
+    <Property Name="HubAdmin" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Hub" Relationship="Self.fk_HubId" FromRole="UserHub" ToRole="Hub" />
+    <NavigationProperty Name="HubEvents" Relationship="Self.FK_HubEvents_UserHub" FromRole="UserHub" ToRole="HubEvents" />
+    <NavigationProperty Name="Notes" Relationship="Self.fk_UserHubId" FromRole="UserHub" ToRole="Notes" />
+    <NavigationProperty Name="Tasks" Relationship="Self.UserHubId" FromRole="UserHub" ToRole="Tasks" />
+    <NavigationProperty Name="User" Relationship="Self.fk_UserId" FromRole="UserHub" ToRole="User" />
+  </EntityType>
+  <Association Name="fk_HubId">
+    <End Role="Hub" Type="Self.Hub" Multiplicity="1" />
+    <End Role="UserHub" Type="Self.UserHub" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hub">
+        <PropertyRef Name="HubId" />
+      </Principal>
+      <Dependent Role="UserHub">
+        <PropertyRef Name="HubId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HubEvents_UserHub">
+    <End Role="UserHub" Type="Self.UserHub" Multiplicity="1" />
+    <End Role="HubEvents" Type="Self.HubEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserHub">
+        <PropertyRef Name="UserHubId" />
+      </Principal>
+      <Dependent Role="HubEvents">
+        <PropertyRef Name="UserHubId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_UserHubId">
+    <End Role="UserHub" Type="Self.UserHub" Multiplicity="1" />
+    <End Role="Notes" Type="KitchNotesDatabaseModel.Notes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserHub">
+        <PropertyRef Name="UserHubId" />
+      </Principal>
+      <Dependent Role="Notes">
+        <PropertyRef Name="UserHubId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserHubId">
+    <End Role="UserHub" Type="Self.UserHub" Multiplicity="1" />
+    <End Role="Tasks" Type="KitchNotesDatabaseModel.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserHub">
+        <PropertyRef Name="UserHubId" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="UserHubId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_UserId">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserHub" Type="Self.UserHub" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserHub">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="KitchNotesDatabaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Hubs" EntityType="Self.Hub" />
+    <EntitySet Name="HubEvents" EntityType="Self.HubEvent" />
+    <EntitySet Name="Notes1" EntityType="KitchNotesDatabaseModel.Notes" />
+    <EntitySet Name="Tasks1" EntityType="KitchNotesDatabaseModel.Tasks" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserHubs" EntityType="Self.UserHub" />
+    <AssociationSet Name="fk_HubId" Association="Self.fk_HubId">
+      <End Role="Hub" EntitySet="Hubs" />
+      <End Role="UserHub" EntitySet="UserHubs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HubEvents_UserHub" Association="Self.FK_HubEvents_UserHub">
+      <End Role="UserHub" EntitySet="UserHubs" />
+      <End Role="HubEvents" EntitySet="HubEvents" />
+    </AssociationSet>
+    <AssociationSet Name="fk_UserHubId" Association="Self.fk_UserHubId">
+      <End Role="UserHub" EntitySet="UserHubs" />
+      <End Role="Notes" EntitySet="Notes1" />
+    </AssociationSet>
+    <AssociationSet Name="UserHubId" Association="Self.UserHubId">
+      <End Role="UserHub" EntitySet="UserHubs" />
+      <End Role="Tasks" EntitySet="Tasks1" />
+    </AssociationSet>
+    <AssociationSet Name="fk_UserId" Association="Self.fk_UserId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserHub" EntitySet="UserHubs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

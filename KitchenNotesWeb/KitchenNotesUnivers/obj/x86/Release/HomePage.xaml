@@ -1,0 +1,52 @@
+﻿<Page
+    x:Class="KitchenNotesUnivers.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:KitchenNotesUnivers"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Height="480" Width="800">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock x:ConnectionId='1' x:Name="txtHubName" HorizontalAlignment="Left" Margin="272,10,0,0" TextWrapping="Wrap" Text="KitchenNotes" VerticalAlignment="Top" Height="40" Width="244" Foreground="Black" FontSize="25" TextAlignment="Center"/>
+        <ListView x:ConnectionId='2' x:Name="listViewNotes" Margin="10,108,540,42">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding forename}" FontWeight="Bold" />
+                        <TextBlock Text="{Binding username}"  />
+                        <TextBlock Text="{Binding noteContent}" Foreground="Blue"/>
+                        <TextBlock Text="{Binding timeAgo}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView x:ConnectionId='3' x:Name="listViewTasks" Margin="516,108,0,42">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding forename}" FontWeight="Bold" />
+                        <TextBlock Text="{Binding username}"  />
+                        <TextBlock Text="{Binding taskDetail}" Foreground="Blue"/>
+                        <TextBlock Text="{Binding assignedTo}" Foreground="Red"/>
+                        <TextBlock Text="{Binding timeAgo}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView x:ConnectionId='4' x:Name="listViewEvents" Margin="260,108,284,42">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding name}" FontWeight="Bold" />
+                        <TextBlock Text="{Binding description}"  />
+                        <TextBlock Text="{Binding shortStart}" Foreground="Green"/>
+                        <TextBlock Text="{Binding shortEnd}" Foreground="Red"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </Grid>
+</Page>
+

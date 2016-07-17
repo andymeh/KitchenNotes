@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="KitchNotesDatabaseModelStoreContainer" CdmEntityContainer="KitchNotesDatabaseEntities">
+    <EntitySetMapping Name="Hubs">
+      <EntityTypeMapping TypeName="KitchNotesDatabaseModel.Hub">
+        <MappingFragment StoreEntitySet="Hub">
+          <ScalarProperty Name="HubId" ColumnName="HubId" />
+          <ScalarProperty Name="HubName" ColumnName="HubName" />
+          <ScalarProperty Name="HubAddress" ColumnName="HubAddress" />
+          <ScalarProperty Name="HubLocation" ColumnName="HubLocation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HubEvents">
+      <EntityTypeMapping TypeName="KitchNotesDatabaseModel.HubEvent">
+        <MappingFragment StoreEntitySet="HubEvents">
+          <ScalarProperty Name="HubEventId" ColumnName="HubEventId" />
+          <ScalarProperty Name="UserHubId" ColumnName="UserHubId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Importance" ColumnName="Importance" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notes1">
+      <EntityTypeMapping TypeName="KitchNotesDatabaseModel.Notes">
+        <MappingFragment StoreEntitySet="Notes">
+          <ScalarProperty Name="NoteId" ColumnName="NoteId" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UserHubId" ColumnName="UserHubId" />
+          <ScalarProperty Name="DateEdited" ColumnName="DateEdited" />
+          <ScalarProperty Name="DateHidden" ColumnName="DateHidden" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks1">
+      <EntityTypeMapping TypeName="KitchNotesDatabaseModel.Tasks">
+        <MappingFragment StoreEntitySet="Tasks">
+          <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+          <ScalarProperty Name="TaskDetail" ColumnName="TaskDetail" />
+          <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+          <ScalarProperty Name="UserHubId" ColumnName="UserHubId" />
+          <ScalarProperty Name="Completed" ColumnName="Completed" />
+          <ScalarProperty Name="Hidden" ColumnName="Hidden" />
+          <ScalarProperty Name="DatePosted" ColumnName="DatePosted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="KitchNotesDatabaseModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Forename" ColumnName="Forename" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="CurrentHub" ColumnName="CurrentHub" />
+          <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserHubs">
+      <EntityTypeMapping TypeName="KitchNotesDatabaseModel.UserHub">
+        <MappingFragment StoreEntitySet="UserHub">
+          <ScalarProperty Name="UserHubId" ColumnName="UserHubId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="HubId" ColumnName="HubId" />
+          <ScalarProperty Name="HubAdmin" ColumnName="HubAdmin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

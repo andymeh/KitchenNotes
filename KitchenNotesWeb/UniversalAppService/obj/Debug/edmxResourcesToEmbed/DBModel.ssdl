@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KitchNotesDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Hub">
+    <Key>
+      <PropertyRef Name="HubId" />
+    </Key>
+    <Property Name="HubId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HubName" Type="nchar" MaxLength="20" />
+    <Property Name="HubAddress" Type="nchar" MaxLength="100" />
+    <Property Name="HubLocation" Type="nchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="HubEvents">
+    <Key>
+      <PropertyRef Name="HubEventId" />
+    </Key>
+    <Property Name="HubEventId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserHubId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Description" Type="nchar" MaxLength="300" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="Importance" Type="nchar" MaxLength="20" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Notes">
+    <Key>
+      <PropertyRef Name="NoteId" />
+    </Key>
+    <Property Name="NoteId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="UserHubId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DateEdited" Type="datetime" />
+    <Property Name="DateHidden" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Tasks">
+    <Key>
+      <PropertyRef Name="TaskId" />
+    </Key>
+    <Property Name="TaskId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TaskDetail" Type="nchar" MaxLength="200" Nullable="false" />
+    <Property Name="AssignedTo" Type="nchar" MaxLength="50" />
+    <Property Name="UserHubId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Completed" Type="bit" Nullable="false" />
+    <Property Name="Hidden" Type="bit" Nullable="false" />
+    <Property Name="DatePosted" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Forename" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nchar" MaxLength="40" Nullable="false" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="Email" Type="nchar" MaxLength="30" Nullable="false" />
+    <Property Name="CurrentHub" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="LastLogin" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserHub">
+    <Key>
+      <PropertyRef Name="UserHubId" />
+    </Key>
+    <Property Name="UserHubId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HubId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HubAdmin" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_HubEvents_UserHub">
+    <End Role="UserHub" Type="Self.UserHub" Multiplicity="1" />
+    <End Role="HubEvents" Type="Self.HubEvents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserHub">
+        <PropertyRef Name="UserHubId" />
+      </Principal>
+      <Dependent Role="HubEvents">
+        <PropertyRef Name="UserHubId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_HubId">
+    <End Role="Hub" Type="Self.Hub" Multiplicity="1" />
+    <End Role="UserHub" Type="Self.UserHub" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hub">
+        <PropertyRef Name="HubId" />
+      </Principal>
+      <Dependent Role="UserHub">
+        <PropertyRef Name="HubId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_UserHubId">
+    <End Role="UserHub" Type="Self.UserHub" Multiplicity="1" />
+    <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserHub">
+        <PropertyRef Name="UserHubId" />
+      </Principal>
+      <Dependent Role="Notes">
+        <PropertyRef Name="UserHubId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_UserId">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserHub" Type="Self.UserHub" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserHub">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserHubId">
+    <End Role="UserHub" Type="Self.UserHub" Multiplicity="1" />
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserHub">
+        <PropertyRef Name="UserHubId" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="UserHubId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="KitchNotesDatabaseModelStoreContainer">
+    <EntitySet Name="Hub" EntityType="Self.Hub" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HubEvents" EntityType="Self.HubEvents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notes" EntityType="Self.Notes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserHub" EntityType="Self.UserHub" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_HubEvents_UserHub" Association="Self.FK_HubEvents_UserHub">
+      <End Role="UserHub" EntitySet="UserHub" />
+      <End Role="HubEvents" EntitySet="HubEvents" />
+    </AssociationSet>
+    <AssociationSet Name="fk_HubId" Association="Self.fk_HubId">
+      <End Role="Hub" EntitySet="Hub" />
+      <End Role="UserHub" EntitySet="UserHub" />
+    </AssociationSet>
+    <AssociationSet Name="fk_UserHubId" Association="Self.fk_UserHubId">
+      <End Role="UserHub" EntitySet="UserHub" />
+      <End Role="Notes" EntitySet="Notes" />
+    </AssociationSet>
+    <AssociationSet Name="fk_UserId" Association="Self.fk_UserId">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserHub" EntitySet="UserHub" />
+    </AssociationSet>
+    <AssociationSet Name="UserHubId" Association="Self.UserHubId">
+      <End Role="UserHub" EntitySet="UserHub" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
